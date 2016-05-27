@@ -1,0 +1,301 @@
+#loading {
+  height: 100%;
+  width: 100%;
+}
+@font-face {
+  font-family: clock;
+  src: url(font.otf);
+}
+
+#mainPopup {
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  font-family: Helvetica, Ubuntu, Arial, sans-serif;
+  background: #FFFFFF;
+  border-color: #CECECE;
+  border-style: solid;
+  border-width: 6px;
+}
+
+.maincolor {
+  padding: 20px;
+  height: 550px;
+  width: 450px;
+  background-color: #336699;
+}
+
+
+
+.tv {
+  text-align: center;
+  padding: 20px;
+}
+
+/*.settings {
+position:absolute;
+top:30px;
+right:30px;
+}*/
+
+.updatedSched {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  flex-grow: 1;
+}
+
+#start {
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  z-index: 3;
+  /*position: absolute;
+  bottom: 40px;
+  left: 140px;*/
+  text-align: center;
+  line-height: 22px;
+  flex: 1;
+  cursor: default;
+  font-family: clock !important;
+
+}
+#end {
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  z-index: 3;
+  /*position: absolute;
+  bottom: 40px;
+  left: 420px;*/
+  text-align: center;
+  line-height: 22px;
+  flex: 1;
+  margin-top: auto;
+  cursor: default;
+  font-family: clock !important;
+
+}
+
+.schedule {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  z-index: 5;
+  font-family: clock;
+  color: #CECECE;
+  text-align: center;
+  width: 50px;
+  cursor: default;
+}
+.toprow {
+  display: flex;
+  font-family: clock;
+}
+
+.times {
+  flex: 1;
+  display: flex;
+}
+
+.timeLabels {
+  flex: 1;
+  text-align: center;
+  font-size: 13px !important;
+  cursor: default;
+
+}
+
+.labels {
+  display: flex;
+  align-items: flex-end;
+  font-family: clock;
+  padding: 0px 0px 0px 0px;
+}
+
+.segment {
+  height: 100%;
+  width: 100%;
+  z-index: 40;
+}
+.sub {
+  display: inline;
+  font-size: 18px;
+}
+
+.middlerow {
+  display: flex;
+  flex-direction: row;
+  padding: 9px 0;
+}
+
+.schoology {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#box {
+  flex: 1;
+  border: 1px solid #2185d0;
+}
+
+#line {
+  border: 1px solid #336699;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  top: 33px;
+}
+
+#upcoming {
+  padding: 0px;
+  position: relative;
+  font-size: 20px;
+  font-family: clock;
+  text-align: center;
+  line-height: 30px; /* <-- this is what you must define */
+  vertical-align: middle;
+}
+
+.assignments {
+  height: 378px;
+  width: 100%;
+  line-height: 30px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+.assignmentDate {
+  text-align: center;
+  background-color: #336699;
+  width: 100%;
+  color: white;
+  cursor: default;
+
+}
+
+.title {
+  text-align: center;
+  cursor: pointer;
+  font-family: clock;
+}
+
+.title:hover {
+  background-color: #CECECE;
+}
+
+/*.title:nth-child(even)
+{
+background: #2EFEF7;
+}*/
+
+
+span {
+  display: none;
+}
+
+
+.header {
+  font-family: clock;
+  font-size: 24px;
+  color: white !important;
+  padding: 10px !important;
+  /*text-decoration: underline;*/
+}
+
+.assignmentName {
+  font-family: clock;
+  font-size: 18px;
+  color: white !important;
+  padding: 10px 0px 0px 0px!important;
+  text-align: left !important;
+  left: 18px !important;
+}
+
+.description {
+  font-family: clock;
+  font-size: 15px;
+  margin: auto !important;
+  color: white !important;
+  text-align: left !important;
+  left: 18px !important;
+
+
+}
+
+.modal {
+  overflow-y: scroll;
+  /*top: 100px !important;
+  left: 20px !important;*/
+
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.dimmerSchool {
+  background-color: rgba(51, 102, 153, 0.85) !important;
+  text-align: left;
+  padding: 15px !important;
+}
+
+.segment {
+  padding: 0px 0px 0px 0px !important;
+
+}
+
+.ui.modal > .header {
+  border: none !important;
+}
+
+html, body {
+  height: 0% !important;
+}
+
+.ui.divider {
+  left: 18px !important;
+}
+
+.subContainer {
+  display: inline;
+}
+
+#lunch {
+  cursor: pointer;
+}
+
+.noAssignments {
+  height: 378px;
+  width: 100%;
+  background-color: #EDEBEB !important;
+  flex-direction: column;
+}
+
+.boxText {
+  font-size: 15px;
+  padding: 15px;
+  line-height: normal !important;
+  color: #333;
+
+}
+
+.smallButtonContainer {
+  padding-left: 15px;
+}
+.optionsGo {
+}
+
+.noAssigmentText {
+  display: none;
+  font-size: 20px;
+  padding: 10px;
+  font-family: clock;
+  color: #336699;
+}

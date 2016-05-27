@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head><title>Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.css">
+  <link rel="stylesheet" type="text/css" href="options.css">
+</head>
+<body>
+
+  <div class = "maincolor">
+    <div id="mainPopup">
+      <!-- <h1>Options</h1> <button class = 'ui large button bug'>Report Bug</button> -->
+
+      <div class = 'container'>
+        <div class = 'headerTop'>
+          <h1>Options</h1>
+
+
+          <div class = 'ui  huge button bug'>
+            Report Issue
+          </div>
+        </div>
+
+
+        <div class = 'schoology'>
+          <!-- <fieldset>
+          <legend>Schoology</legend> -->
+          <div class = 'instructions'>
+            <div class="ui message box">
+              <div class="header">
+                Retrieve Schoology Assignments
+              </div>
+              <p>Please click 'Grant Access' to give the extension the ability to retrieve and display your upcoming assignments.<p>
+              <!-- <p>To have the extension display your upcoming assignments, you need to grant access to your Schoology assignments. To seamlessly fetch the information needed, please click the button below.  (Please sign into schoology if the website prompts you).</p> -->
+            <div class ='smallButtonContainer'>
+              <button class = "ui green button allow">Grant Access</button>
+            </div>
+            </div>
+          </div>
+          <div class = 'keys'>
+            <div class="ui labeled input consumer actual">
+              <div class="ui label consumerLabel">
+                <span id = 'showNormal'>Consumer <br> Key:</span><span id = 'showMedia'>Consumer</span>
+              </div>
+              <input type="text" placeholder="Consumer Key"  id = "consumer" readonly>
+            </div>
+            <div class="ui labeled input secret actual">
+              <div class="ui label ">
+                <span id = 'showNormal'>Consumer <br> Secret:</span><span id = 'showMedia'>Secret</span>
+              </div>
+              <input type="text" placeholder="Consumer Secret" id = "secret"readonly>
+            </div>
+          </div>
+
+          <!-- </fieldset> -->
+        </div>
+        <div class = 'notifications'>
+          <h2>Notifications</h2>
+          <div class = 'ui blue button test'>Show Sample Notification</div>
+          <div class = 'ui message'>
+            <p>Push notifications can be shown on your desktop screen at a set time remaining from each class. For example, if notification time is set to 5 minutes, a notification will be sent when there is 5 minutes left in the period. Also, you can optionally select a 'ding' sound to play as well. By default, notifications are turned on. To turn off, click the slider in the top right. To see a sample notification, click the button in the top left. </p>
+          </div>
+          <h4 class="ui horizontal divider header">
+            <i class="clock icon"></i>
+            Notification Time
+          </h4>
+          <div class = "notificationCheckBoxCSS">
+            <div class="ui  large checked slider checkbox notificationsCheck">
+              <input type="checkbox" id="notificationsCheck">
+              <label id = "enabled">Enabled</label>
+            </div>
+          </div>
+          <span id = "dropdownSpan">
+            <div class="ui inline dropdown" id = "dropdown">
+              <div class="text minutesText">
+                5 Minutes
+              </div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" data-value="1">1 Minute</div>
+                <div class="item" data-value="2">2 Minutes</div>
+                <div class="item" data-value="3">3 Minutes</div>
+                <div class="item" data-value="4">4 Minutes</div>
+                <div class="item" data-value="5">5 Minutes</div>
+                <div class="item" data-value="6">6 Minutes</div>
+                <div class="item" data-value="7">7 Minutes</div>
+                <div class="item" data-value="8">8 Minutes</div>
+                <div class="item" data-value="9">9 Minutes</div>
+                <div class="item" data-value="10">10 Minutes</div>
+                <div class="item" data-value="11">11 Minutes</div>
+                <div class="item" data-value="12">12 Minutes</div>
+                <div class="item" data-value="13">13 Minutes</div>
+                <div class="item" data-value="14">14 Minutes</div>
+                <div class="item" data-value="15">15 Minutes</div>
+                <div class="item" data-value="16">16 Minutes</div>
+                <div class="item" data-value="17">17 Minutes</div>
+                <div class="item" data-value="18">18 Minutes</div>
+                <div class="item" data-value="19">19 Minutes</div>
+                <div class="item" data-value="20">20 Minutes</div>
+                <div class="item" data-value="21">21 Minutes</div>
+                <div class="item" data-value="22">22 Minutes</div>
+                <div class="item" data-value="23">23 Minutes</div>
+                <div class="item" data-value="24">24 Minutes</div>
+                <div class="item" data-value="25">25 Minutes</div>
+                <div class="item" data-value="26">26 Minutes</div>
+                <div class="item" data-value="27">27 Minutes</div>
+                <div class="item" data-value="28">28 Minutes</div>
+                <div class="item" data-value="29">29 Minutes</div>
+                <div class="item" data-value="30">30 Minutes</div>
+                <div class="item" data-value="31">31 Minutes</div>
+                <div class="item" data-value="32">32 Minutes</div>
+                <div class="item" data-value="33">33 Minutes</div>
+                <div class="item" data-value="34">34 Minutes</div>
+                <div class="item" data-value="35">35 Minutes</div>
+                <div class="item" data-value="36">36 Minutes</div>
+                <div class="item" data-value="37">37 Minutes</div>
+                <div class="item" data-value="38">38 Minutes</div>
+                <div class="item" data-value="39">39 Minutes</div>
+                <div class="item" data-value="40">40 Minutes</div>
+
+
+              </div>
+              before the end of the period.
+            </span>
+          </div>
+          <h4 class="ui horizontal divider header">
+            <i class="bell outline icon"></i>
+            Sound Settings
+          </h4>
+          <div class = 'soundCheckboxCSS'>
+            <div class="ui checkbox sound" id = "sound">
+              <input type="checkbox" name="sound">
+              <label>Play sound with notification</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script src= "jsOAuth-1.3.7.js"></script>
+  <script src="jquery-2.2.1.min.js"></script>
+  <script src="semantic.js"></script>
+  <script src="options.js"></script>
+  <script src="date.js"></script>
+  </html>
