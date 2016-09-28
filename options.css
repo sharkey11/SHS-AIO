@@ -200,4 +200,30 @@ h2 {
 	.box {
 		margin-top: 0px !important;
 	}
+	.bug {
+		top: 60px;
+	}
+}
+
+.arrow {
+    position: fixed;
+		color: black;
+		top: 50px;
+		right: 35px;
+    width: 40px;
+    height: 40px;
+    font-size: 60px;
+    line-height: 40px;
+    -webkit-animation: bounce 2s infinite ease-in-out;
+		display: none;
+}
+@-webkit-keyframes bounce {
+	0%, 20%, 60%, 100%  { -webkit-transform: translateY(0); }
+    40%  { -webkit-transform: translateY(-50px); }
+	80% { -webkit-transform: translateY(-40px); }
+}
+
+.disclaimer {
+	color: red;
+	font-size: 12px;
 }

@@ -13,6 +13,7 @@ var totalTime;
 var offset;
 var lunchTime;
 var totalTimeWithOffset;
+var refreshed = false;
 var schoolOver = false;
 var currentClass;
 var startCurrentLunchPeriod;
@@ -56,19 +57,26 @@ var endCurrentLunchPeriod;
 var todayTimeInterval;
 var timersInterval;
 var createNotificationInterval;
+var lunchClassPeriod;
+
+chrome.storage.sync.set({'wentOffline' : false})
+
 // Check whether new version is installed
+
+
+
 chrome.runtime.onInstalled.addListener(function(details){
   if(details.reason == "install"){
-    chrome.storage.sync.set({'hasKeys': 'NO', 'notificationTimeWanted' : 300, 'textHTML' : '5 minutes', 'state' : true, 'sound' : false })
-    $.ajax({
-      method: 'get',
-      url: "http://shsaio.net16.net/push.json",
-      jsonp:false,
-      success: function(data ) {
-        version = data.version
-        chrome.storage.sync.set({'version' : version})
-      }
-    });
+    chrome.storage.sync.set({'hasKeys': 'NO', 'notificationTimeWanted' : 300, 'textHTML' : '5 minutes', 'state' : true, 'sound' : false, 'opened' : false})
+    // $.ajax({
+    //   method: 'get',
+    //   url: "https://cs.westport.k12.ct.us/~js51683/push.json",
+    //   jsonp:false,
+    //   success: function(data ) {
+    //     version = data.version
+    //     chrome.storage.sync.set({'version' : version})
+    //   }
+    // });
     window.open(chrome.runtime.getURL('options.html'));
 
   } else if(details.reason == "update"){
@@ -76,7 +84,7 @@ chrome.runtime.onInstalled.addListener(function(details){
     // chrome.notifications.create ({
     //   type: "basic",
     //   title: "Updated to version " + thisVersion,
-    //   message: "Notifications fixed. You can enable them again if you disabled them." ,
+    //   message: "Bug fixes as well as notifications fixed. You can re-enable them if you disabled them. " ,
     //   iconUrl: "128.png",
     // });
 
@@ -113,13 +121,14 @@ function retrieveAJAX (){
 
       totalTime = totalSeconds + totalMinutes + totalHours;
       offset = totalTime - localTotalTime
-      // offset = 17 * 60
+      // offset = 10 * 60*80
 
       $.ajax({
-        url: "https://tv.csapp.westport.k12.ct.us/api/schedule/today",
+        url: "http://shstv.herokuapp.com/api/schedule/today",
         method: 'GET',
         success: function(data){
-          scheduleData = data;
+          scheduleData = data
+
           todayTime();
           buildSched();
           timers();
@@ -131,12 +140,67 @@ function retrieveAJAX (){
           timersInterval = setInterval(timers, 500)
           clearInterval(createNotificationInterval);
           createNotificationInterval = setInterval(createNotification, 1000)
-        }
+        },
       })
+    },
+    error: function() {
+      callOtherServer();
     }
   })
 }
 
+
+function callOtherServer() {
+  $.ajax({
+    url: "http://shstv.herokuapp.com/api/time/now",
+    method: 'GET',
+    success: function(data){
+
+      timeData = data;
+      var currentTime = JSON.parse(timeData);
+      var totalHours = currentTime.hours
+      var totalMinutes = currentTime.mins
+      var totalSeconds = currentTime.secs
+
+      totalHours = totalHours*3600
+      totalMinutes = totalMinutes*60
+
+      var localTime = new Date();
+      var localSeconds = localTime.getSeconds();
+      var localMinutes = localTime.getMinutes();
+      var localHours = localTime.getHours();
+
+      localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
+
+      totalTime = totalSeconds + totalMinutes + totalHours;
+      offset = totalTime - localTotalTime
+      // offset = 10 * 60
+
+      $.ajax({
+        url: "http://shstv.herokuapp.com/api/schedule/today",
+        method: 'GET',
+        success: function(data){
+          scheduleData = data
+
+          todayTime();
+          buildSched();
+          timers();
+          finalArrays();
+          createNotification();
+          clearInterval(todayTimeInterval)
+          todayTimeInterval = setInterval(todayTime, 500)
+          clearInterval(timersInterval)
+          timersInterval = setInterval(timers, 500)
+          clearInterval(createNotificationInterval);
+          createNotificationInterval = setInterval(createNotification, 1000)
+        },
+      })
+    },
+    error: function() {
+      chrome.runtime.sendMessage({'offline' : true})
+    }
+  })
+}
 retrieveAJAX();
 setInterval(retrieveAJAX,1000*60*15)
 
@@ -151,9 +215,7 @@ function todayTime() {
 
   localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
 
-  if (localTotalTime === 14400 ) {
-    chrome.runtime.reload()
-  }
+
 
   // totalTimeWithOffset = 27000 + offset;
   totalTimeWithOffset = localTotalTime + offset;
@@ -379,12 +441,17 @@ function timers () {
     var firstClass = currentSched[0]
     if (isLunch) {
 
-      if(currentClass !== lunchClassPeriod && passingTime == false) {
+      if(currentClass !== lunchClassPeriod && passingTime == false ) {
         if (totalTimeWithOffset > lastClass.end_seconds || totalTimeWithOffset < firstClass.start_seconds && passingTime == false) {
           schoolOver = true;
           timeLeftMinutes = undefined;
         }
       }
+    }
+
+    if (totalTimeWithOffset > lastClass.end_seconds || totalTimeWithOffset < firstClass.start_seconds && passingTime == false) {
+      schoolOver = true;
+      timeLeftMinutes = undefined;
     }
     // nextClass = currentSched[nextClassPosition]
     if (school && schoolOver == false) {
@@ -396,7 +463,7 @@ function timers () {
         for(var i = 0; i < currentSched.length; i++) {
           var nextClassPosition = currentSched.indexOf(currentSched[i]) + 1
           var nextClassTest = currentSched[nextClassPosition]
-          if(lastClass.name != currentClass.name) {
+          if(lastClass.name != currentClass.name && nextClassTest !== undefined) {
             if (totalTimeWithOffset > currentSched[i].end_seconds && totalTimeWithOffset < nextClassTest.end_seconds) {
               nextClass = currentSched[nextClassPosition]
               startingClass = currentSched[i]
@@ -489,7 +556,6 @@ function timers () {
           }
         }
       } else {
-
 
 
         timeIn = totalTimeWithOffset - startCurrentClassTime
@@ -658,7 +724,7 @@ function finalArrays () {
 }
 
 function sendSchedulesVariables() {
-  chrome.runtime.sendMessage({'school' : school, 'allClassOrder' : allClassOrder, 'allClassTimes' : allClassTimes, 'schoolOver' : schoolOver, 'currentClass' : currentClass, 'passingTime' : passingTime, 'nextClass' : nextClass, 'schedule' : true})
+  chrome.runtime.sendMessage({'school' : school, 'allClassOrder' : allClassOrder, 'allClassTimes' : allClassTimes, 'schoolOver' : schoolOver, 'currentClass' : currentClass, 'passingTime' : passingTime, 'nextClass' : nextClass, 'schedule' : true, 'lunchClassPeriod' : lunchClassPeriod, 'currentLunchPeriod' : currentLunchPeriod})
 }
 
 function sendTimeVariables () {
@@ -672,8 +738,11 @@ function sendExtra() {
 var checkOpen
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-
     if (request.open === true) {
+      $(document).ajaxError(function() {
+        chrome.runtime.sendMessage({'offline' : true})
+      })
+
       sendSchedulesVariables();
       sendTimeVariables();
       sendExtra();
@@ -690,11 +759,9 @@ chrome.runtime.onMessage.addListener(
 var secondsPassed;
 var notificationSentTime = 0;
 function createNotification() {
-  console.log('Create Notif running')
   var timeOfClass = (endCurrentClassTime - startCurrentClassTime) / 60;
   var timeOfClassLunch = (endCurrentLunchPeriod - startCurrentLunchPeriod) / 60;
   var timeInNotif = timeIn / 60
-  var progress = Math.round(timeInNotif / timeOfClass *100)
   var progressLunch = Math.round(timeInNotif / timeOfClassLunch *100)
   chrome.storage.sync.get(null, function(items) {
     var notificationTimeWanted = items.notificationTimeWanted
@@ -703,8 +770,6 @@ function createNotification() {
     var notificationTime = endCurrentClassTime - notificationTimeWanted;
     // var notificationTime = 62620;
     var notificationTimeLunch = endCurrentLunchPeriod - notificationTimeWanted;
-    console.log(totalTimeWithOffset)
-    console.log(notificationSentTime)
     secondsPassed = totalTimeWithOffset - notificationSentTime
 
     var isAre;
@@ -713,34 +778,52 @@ function createNotification() {
     var end;
     var lunchNameOrClassName;
 
+    if(school && !schoolOver) {
+      if (notificationTimeWanted > 60) {
+        isAre = 'are'
+        minutePlural = 'minutes'
+      } else {
+        isAre = 'is'
+        minutePlural = 'minute'
+      }
 
-    if (notificationTimeWanted > 60) {
-      isAre = 'are'
-      minutePlural = 'minutes'
-    } else {
-      isAre = 'is'
-      minutePlural = 'minute'
+      if (lunchTime) {
+        lunchOrClass = 'lunch wave'
+        lunchNameOrClassName = currentLunchPeriod;
+        notificationTime = endCurrentLunchPeriod - notificationTimeWanted;
+        progress= Math.round(timeInNotif / timeOfClassLunch *100)
+
+      } else {
+        lunchOrClass = 'period'
+        lunchNameOrClassName = currentClass.name
+        progress = Math.round(timeInNotif / timeOfClass *100)
+
+      }
+      if (lastPeriod) {
+        end = 'School is almost over!'
+      } else if (lunchTime) {
+        end = ''
+      } else{
+        end = 'Next period is period ' + nextClass.name + '.'
+      }
+
+      if (parseInt(timeLeftMinutes) < 10) {
+        timeLeftNotificationText = parseInt(timeLeftMinutes.substring(1))
+      } else {
+        timeLeftNotificationText = timeLeftMinutes
+      }
+
     }
 
-    if (lunchTime) {
-      lunchOrClass = 'lunch wave'
-      lunchNameOrClassName = currentLunchPeriod;
-      notificationTime = endCurrentLunchPeriod - notificationTimeWanted;
-    } else {
-      lunchOrClass = 'period'
-      lunchNameOrClassName = currentClass.name
-    }
-    if (lastPeriod) {
-      end = 'School is almost over!'
-    } else {
-      end = 'Next period is period ' + nextClass.name + '.'
-    }
-    console.log(notificationTime)
+
+
+
+
     if(notificationTime === totalTimeWithOffset && secondsPassed > 10) {
       chrome.notifications.create ({
         type: "progress",
-        title: timeLeftMinutes + ' ' + minutePlural +  ' left!',
-        message: "There " + isAre + ' ' + timeLeftMinutes + ' ' + minutePlural + ' left in ' + lunchOrClass + ' ' + lunchNameOrClassName + '. ' + end,
+        title: timeLeftNotificationText + ' ' + minutePlural +  ' left!',
+        message: "There " + isAre + ' ' + timeLeftNotificationText + ' ' + minutePlural + ' left in ' + lunchOrClass + ' ' + lunchNameOrClassName + '. ' + end,
         iconUrl: "128.png",
         progress: progress
       });
@@ -756,10 +839,18 @@ var timeLeftBadgeText;
 
 setInterval(function(){
   if (timeLeftMinutes !== undefined) {
-    if (timeLeftSeconds > 30 ) {
+    if (timeLeftSeconds > 30  && timeLeftMinutes > 10) {
+
      timeLeftBadgeText = timeLeftMinutes + 1
-    } else if (timeLeftSeconds < 30) {
+   } else if (timeLeftSeconds < 30 && timeLeftMinutes > 10) {
       timeLeftBadgeText = timeLeftMinutes
+    }
+
+    if (timeLeftMinutes < 10 && timeLeftSeconds > 30) {
+      timeLeftBadgeText = parseInt(timeLeftMinutes.substring(1)) + 1
+    } else if (timeLeftMinutes < 10 && timeLeftSeconds < 30) {
+      timeLeftBadgeText = parseInt(timeLeftMinutes.substring(1))
+
     }
 
     chrome.browserAction.setBadgeText({text: timeLeftBadgeText + "m"})
@@ -809,17 +900,19 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-setInterval(function(){
-  $.ajax({
-    method: 'get',
-    url: "http://shsaio.net16.net/push.json",
-    jsonp:false,
-    success: callNotifAJax
-  });
-},1000*60)
+// setInterval(function(){
+//
+//   $.ajax({
+//     method: 'get',
+//     url: "https://cs.westport.k12.ct.us/~js51683/push.json",
+//     jsonp:false,
+//     success: callNotifAJax
+//   });
+// },1000*60)
 
 function callNotifAJax (data) {
   var newVersion = data.version
+
   var message = data.message
   var title = data.title
   chrome.storage.sync.get(null,function(item){
@@ -836,3 +929,33 @@ function callNotifAJax (data) {
   })
 
 }
+
+
+//HANDLE OFFLINE CONNECTION
+
+$(document).ajaxError(function() {
+  console.log("Offline.")
+
+  setInterval(function() {
+    chrome.runtime.reload()
+  }, 1000*60);}
+);
+
+//reload daily
+
+setInterval(function(){
+  var fullDate = new Date();
+  var todaysDate = fullDate.getDate();
+
+  chrome.storage.sync.get(null,function(item){
+    storedDate = item.date
+
+    if (storedDate === undefined || storedDate !== todaysDate) {
+      chrome.storage.sync.set({"date" : todaysDate})
+      retrieveAJAX();
+    }
+
+  })
+
+
+},5000);

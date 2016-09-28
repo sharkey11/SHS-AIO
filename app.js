@@ -17,6 +17,34 @@ var passingTime;
 var audio;
 
 
+chrome.storage.sync.set({'opened' : true})
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request.offline)
+    if (request.offline) {
+      console.log(request.offline)
+      wentOffline = true;
+      chrome.storage.sync.set({'wentOffline' : wentOffline})
+      $('.toprow').hide();
+      $('.middlerow').hide();
+      $('.labels').hide();
+      $('.loader').html("Failed to connect to server. Please check connection and try again.")
+      $('.dimmerFull').dimmer('show')
+
+
+    }
+  }
+)
+
+chrome.storage.sync.get(null, function(item){
+  if (item.wentOffline) {
+    chrome.runtime.reload()
+  }
+})
+
+
 
 setTimeout(function(){
   audio  = new Audio('bell.mp3')
@@ -44,6 +72,8 @@ function retriveVariables() {
         currentClass = request.currentClass
         passingTime = request.passingTime
         nextClass = request.nextClass
+        lunchClassPeriod = request.lunchClassPeriod
+        currentLunchPeriod = request.currentLunchPeriod
         addSchedule();
       }
       if (request.time) {
@@ -68,7 +98,11 @@ function retriveVariables() {
         changeDate();
         changeTimes();
         setInterval(changeTimes,500)
+
+
+
       }
+
 
     }
 
@@ -139,7 +173,7 @@ function addSchedule() {
   $('.updatedSched').css('font-size', totalObjectsHeight);
 
   $('#lunch').click(function(){
-    var newURL = "http://www.westport.k12.ct.us/uploaded/site_files/shs/main_office/Revised_Lunch_Schedule_15-16.pdf";
+    var newURL = "http://shs.westport.k12.ct.us/uploaded/site_files/shs/main_office/Lunch_Schedule_16-17.pdf";
     chrome.tabs.create({ url: newURL });
   });
 }
@@ -158,10 +192,18 @@ function changeTimer() {
   if (currentClass === 'passing' && refreshed === false) {
     addSchedule();
     refreshed = true;
-  } else {
+  } else if (currentClass !== 'passing') {
     refreshed = false;
   }
 
+if (school && !schoolOver) {
+  if (currentClass.name === lunchClassPeriod) {
+    $('.sub').html(currentLunchPeriod)
+  } else {
+    $('.sub').html('L')
+
+  }
+}
 }
 
 function changeTimes() {
@@ -234,6 +276,7 @@ chrome.storage.sync.get(null, function(items) {
     allAssignments = [];
     var yyyymmdd = getFormattedDate();
     oauth.get('https://api.schoology.com/v1/app-user-info', function (data) {
+
       var userId = JSON.parse(data.text).api_uid
       var eventsLink = 'https://api.schoology.com/v1/users/' + userId + '/events/?start_date=' + getFormattedDate() + '&end_date=' + getFormattedDate(1);
       courses = 'https://api.schoology.com/v1/users/' + userId + '/sections'
@@ -241,11 +284,15 @@ chrome.storage.sync.get(null, function(items) {
         var eventTitles = JSON.parse(data.text)
         for(var i = 0; i < eventTitles.event.length; i++) {
           var year = eventTitles.event[i].start.substring(0,4)
-          var month = eventTitles.event[i].start.substring(6,7)
+          if (eventTitles.event[i].start.substring(5,6) == 0 ) {
+            var month = eventTitles.event[i].start.substring(6,7)
+          } else {
+            var month = eventTitles.event[i].start.substring(5,7)
+
+          }
           var day = eventTitles.event[i].start.substring(8,10)
           var fullDate = month + '/' + day
           allAssignments.push({title: eventTitles.event[i].title, date: fullDate, description: eventTitles.event[i].description, section_id: eventTitles.event[i].section_id, type: eventTitles.event[i].type})
-          //(eventTitles.event[i])
         }
         attachData();
       });
@@ -256,20 +303,26 @@ chrome.storage.sync.get(null, function(items) {
   var sections;
 
   function attachData(){
+
     day = ''
     if (allAssignments.length === 0) {
       $('.noAssigmentText').css("display", "block")
     } else {
       for(var i = 0; i < allAssignments.length; i++) {
         day = Date.parse(allAssignments[i].date).getDayName()
-        if (i === 0 || allAssignments[i-1].date !== allAssignments[i].date) {
+        if (i === 0 || allAssignments[i-1].date !== allAssignments[i].date && allAssignments[i].date !== "Add Assignment") {
           var newDate = $("<div class = 'assignmentDate'>" + day + ' ' + allAssignments[i].date + "</div>");
+          $('.assignments').append(newDate)
+        } else if (allAssignments[i].date == "Add Assignment") {
+          var newDate = $("<div class = 'assignmentDate'>" + allAssignments[i].date + "</div>");
           $('.assignments').append(newDate)
         }
         var newAssignment = $("<div class = 'title'>" + allAssignments[i].title + "</div>")
         $('.assignments').append(newAssignment)
 
       }
+      // var add = allAssignments[allAssignments.length - 1];
+
     }
     $('.dimmerFull').dimmer('hide');
 
@@ -317,12 +370,14 @@ chrome.storage.sync.get(null, function(items) {
         if (allAssignments[place].description == '' ) {
           description = $('<div class = "header">' +  txt + '</div><div class = "assignmentName">' + specificClass + '</div><div class = "ui divider"></div><div class="description">No description for this assignment.</div>');
 
-        } else  {
+          // } else if (allAssignments[place].date == 'Add Assignment') {
+          //
+          //   // description = $('<div class = "header">' + txt + '</div><div class = "ui divider"></div><div class = "ui input">hi</div>');
+          //
+        }  else  {
           description = $('<div class = "header">' + txt + '</div><div class = "assignmentName">' + specificClass + '</div><div class = "ui divider"></div><div class="description">' + allAssignments[place].description + '</div>');
 
         }
-
-
 
         $('.dimmerSchool').html(description)
 
@@ -341,7 +396,7 @@ chrome.storage.sync.get(null, function(items) {
       $('.dimmerSchool')
       .dimmer('hide');
 
-    });
+    });``
 
   }
 
@@ -356,3 +411,39 @@ $('.optionsGo').click(function(){
     window.open(chrome.runtime.getURL('options.html'));
   }
 })
+
+var localTime = new Date();
+var localSeconds = localTime.getSeconds();
+var localMinutes = localTime.getMinutes();
+var localHours = localTime.getHours();
+
+
+
+var localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
+
+// setInterval(function(){
+//   if($('.active').length !== 0) {
+//
+//     var newTime = new Date();
+//     var newSeconds = newTime.getSeconds();
+//     var newMinutes = newTime.getMinutes();
+//     var newHours = newTime.getHours();
+//
+//     newTotalTime = (newHours * 3600) + (newMinutes * 60) + newSeconds
+//
+//     var difference = newTotalTime - localTotalTime
+//     console.log(difference)
+//     console.log(newTotalTime)
+//
+//     if (difference > 10 ) {
+//
+//       $('.loader').html("Failed to connect to Schoology. Please go to the options page and re-click grant access. If error still persists, please contact the developer for assistance.")
+//     } else {
+//       $('.loader').html("")
+//
+//     }
+//   } else {
+//     $('.loader').html("")
+//
+//   }
+// },1000)

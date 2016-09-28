@@ -12,7 +12,6 @@ chrome.storage.sync.get(null, function(items) {
 
 $('.allow').click(function(){
   chrome.runtime.sendMessage({readyFromOptions:'ready'})
-  console.log('hi.')
 })
 
 $('.bug').click(function(){
@@ -130,6 +129,33 @@ var audio = new Audio('bell.mp3');
 $('.play').click(function(){
   audio.play()
 })
+
+setInterval(function(){
+  chrome.storage.sync.get(null, function(items) {
+    hasKeys = items.hasKeys
+    opened = items.opened
+
+    if (hasKeys === "NO") {
+      $('.allow')
+      .transition('shake')
+  ;
+    }
+
+    if (hasKeys === "YES" && !opened) {
+      $('.arrow').css("display", "inline")
+    } else {
+      $('.arrow').css("display", "none")
+
+    }
+
+
+  });
+
+
+},1000)
+
+
+
 
 
 //Special shoutout to Jack Beck for contributing to the design!

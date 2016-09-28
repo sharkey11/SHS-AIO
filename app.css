@@ -177,8 +177,8 @@ right:30px;
   width: 100%;
   color: white;
   cursor: default;
-
 }
+
 
 .title {
   text-align: center;
@@ -225,8 +225,8 @@ span {
   color: white !important;
   text-align: left !important;
   left: 18px !important;
-
-
+  overflow-y: scroll;
+  height: 360px;
 }
 
 .modal {
@@ -287,7 +287,7 @@ html, body {
 }
 
 .smallButtonContainer {
-  padding-left: 15px;
+  padding-left: 13px;
 }
 .optionsGo {
 }
