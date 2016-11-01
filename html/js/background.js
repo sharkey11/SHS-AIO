@@ -116,6 +116,7 @@ function retrieveAJAX (){
       totalTime = totalSeconds + totalMinutes + totalHours;
       offset = totalTime - localTotalTime
 
+      console.log(offset)
       // offset = 10 * 60
 
       $.ajax({
@@ -147,6 +148,58 @@ function retrieveAJAX (){
     })
   }
 
+
+  // function callOtherServer() {
+  //   $.ajax({
+  //     url: "http://shstv.herokuapp.com/api/time/now",
+  //     method: 'GET',
+  //     success: function(data){
+  //
+  //       timeData = data;
+  //       var currentTime = JSON.parse(timeData);
+  //       var totalHours = currentTime.hours
+  //       var totalMinutes = currentTime.mins
+  //       var totalSeconds = currentTime.secs
+  //
+  //       totalHours = totalHours*3600
+  //       totalMinutes = totalMinutes*60
+  //
+  //       var localTime = new Date();
+  //       var localSeconds = localTime.getSeconds();
+  //       var localMinutes = localTime.getMinutes();
+  //       var localHours = localTime.getHours();
+  //
+  //       localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
+  //
+  //       totalTime = totalSeconds + totalMinutes + totalHours;
+  //       offset = totalTime - localTotalTime
+  //       // offset = 10 * 60
+  //
+  //       $.ajax({
+  //         url: "http://shstv.herokuapp.com/api/schedule/today",
+  //         method: 'GET',
+  //         success: function(data){
+  //           scheduleData = data
+  //
+  //           todayTime();
+  //           buildSched();
+  //           timers();
+  //           finalArrays();
+  //           createNotification();
+  //           clearInterval(todayTimeInterval)
+  //           todayTimeInterval = setInterval(todayTime, 500)
+  //           clearInterval(timersInterval)
+  //           timersInterval = setInterval(timers, 500)
+  //           clearInterval(createNotificationInterval);
+  //           createNotificationInterval = setInterval(createNotification, 1000)
+  //         },
+  //       })
+  //     },
+  //     error: function() {
+  //       chrome.runtime.sendMessage({'offline' : true})
+  //     }
+  //   })
+  // }
   retrieveAJAX();
   setInterval(retrieveAJAX,1000*60*15)
 
@@ -168,6 +221,7 @@ function retrieveAJAX (){
     // change = 900
     // change = change + 900
     // offset = offset + change
+
 
     hours = parseInt( totalTimeWithOffset / 3600 ) % 24;
     var minutes = parseInt( totalTimeWithOffset / 60 ) % 60;
