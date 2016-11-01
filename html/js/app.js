@@ -22,7 +22,6 @@ chrome.storage.sync.set({'opened' : true})
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(request.offline)
     if (request.offline) {
       console.log(request.offline)
       wentOffline = true;
@@ -47,7 +46,7 @@ chrome.storage.sync.get(null, function(item){
 
 
 setTimeout(function(){
-  audio  = new Audio('bell.mp3')
+  audio  = new Audio('/bell.mp3')
 },1000)
 
 
@@ -98,12 +97,7 @@ function retriveVariables() {
         changeDate();
         changeTimes();
         setInterval(changeTimes,500)
-
-
-
       }
-
-
     }
 
   )
@@ -302,7 +296,7 @@ chrome.storage.sync.get(null, function(items) {
 
   var sections;
 
-  function attachData(){
+  function attachData() {
 
     day = ''
     if (allAssignments.length === 0) {
@@ -396,21 +390,13 @@ chrome.storage.sync.get(null, function(items) {
       $('.dimmerSchool')
       .dimmer('hide');
 
-    });``
+    });
 
   }
 
 });
 
-$('.optionsGo').click(function(){
-  if (chrome.runtime.openOptionsPage) {
-    // New way to open options pages, if supported (Chrome 42+).
-    chrome.runtime.openOptionsPage();
-  } else {
-    // Reasonable fallback.
-    window.open(chrome.runtime.getURL('options.html'));
-  }
-})
+
 
 var localTime = new Date();
 var localSeconds = localTime.getSeconds();
@@ -420,30 +406,3 @@ var localHours = localTime.getHours();
 
 
 var localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
-
-// setInterval(function(){
-//   if($('.active').length !== 0) {
-//
-//     var newTime = new Date();
-//     var newSeconds = newTime.getSeconds();
-//     var newMinutes = newTime.getMinutes();
-//     var newHours = newTime.getHours();
-//
-//     newTotalTime = (newHours * 3600) + (newMinutes * 60) + newSeconds
-//
-//     var difference = newTotalTime - localTotalTime
-//     console.log(difference)
-//     console.log(newTotalTime)
-//
-//     if (difference > 10 ) {
-//
-//       $('.loader').html("Failed to connect to Schoology. Please go to the options page and re-click grant access. If error still persists, please contact the developer for assistance.")
-//     } else {
-//       $('.loader').html("")
-//
-//     }
-//   } else {
-//     $('.loader').html("")
-//
-//   }
-// },1000)

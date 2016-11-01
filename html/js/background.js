@@ -68,25 +68,19 @@ chrome.storage.sync.set({'wentOffline' : false})
 chrome.runtime.onInstalled.addListener(function(details){
   if(details.reason == "install"){
     chrome.storage.sync.set({'hasKeys': 'NO', 'notificationTimeWanted' : 300, 'textHTML' : '5 minutes', 'state' : true, 'sound' : false, 'opened' : false})
-    // $.ajax({
-    //   method: 'get',
-    //   url: "https://cs.westport.k12.ct.us/~js51683/push.json",
-    //   jsonp:false,
-    //   success: function(data ) {
-    //     version = data.version
-    //     chrome.storage.sync.set({'version' : version})
-    //   }
-    // });
-    window.open(chrome.runtime.getURL('options.html'));
+    $.ajax({
+      method: 'get',
+      url: "https://shsschedule.herokuapp.com/push",
+      jsonp:false,
+      success: function(data ) {
+        version = data.version
+        chrome.storage.sync.set({'version' : version})
+      }
+    });
+    window.open(chrome.runtime.getURL('/html/options.html'));
 
   } else if(details.reason == "update"){
-    var thisVersion = chrome.runtime.getManifest().version;
-    // chrome.notifications.create ({
-    //   type: "basic",
-    //   title: "Updated to version " + thisVersion,
-    //   message: "Bug fixes as well as notifications fixed. You can re-enable them if you disabled them. " ,
-    //   iconUrl: "128.png",
-    // });
+    var thisVersion = chrome.runtime.getManifest().vebion;
 
   };
 });
@@ -98,36 +92,18 @@ setTimeout(function(){
 function retrieveAJAX (){
   allClassOrder = []
   allClassTimes = []
-  $.ajax({
-    url: "https://tv.csapp.westport.k12.ct.us/api/time/now",
-    method: 'GET',
-    success: function(data){
-
-      timeData = data;
-      var currentTime = JSON.parse(timeData);
-      var totalHours = currentTime.hours
-      var totalMinutes = currentTime.mins
-      var totalSeconds = currentTime.secs
-
-      totalHours = totalHours*3600
-      totalMinutes = totalMinutes*60
-
-      var localTime = new Date();
-      var localSeconds = localTime.getSeconds();
-      var localMinutes = localTime.getMinutes();
-      var localHours = localTime.getHours();
-
-      localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
-
-      totalTime = totalSeconds + totalMinutes + totalHours;
-      offset = totalTime - localTotalTime
-      // offset = 10 * 60*80
 
       $.ajax({
-        url: "http://shstv.herokuapp.com/api/schedule/today",
+        url: "https://shsschedule.herokuapp.com/",
         method: 'GET',
         success: function(data){
-          scheduleData = data
+          if (typeof data == "object") {
+            scheduleData = data;
+
+          } else {
+            scheduleData = JSON.parse(data)
+
+          }
 
           todayTime();
           buildSched();
@@ -141,66 +117,63 @@ function retrieveAJAX (){
           clearInterval(createNotificationInterval);
           createNotificationInterval = setInterval(createNotification, 1000)
         },
-      })
-    },
-    error: function() {
-      callOtherServer();
-    }
+
+
   })
 }
 
 
-function callOtherServer() {
-  $.ajax({
-    url: "http://shstv.herokuapp.com/api/time/now",
-    method: 'GET',
-    success: function(data){
-
-      timeData = data;
-      var currentTime = JSON.parse(timeData);
-      var totalHours = currentTime.hours
-      var totalMinutes = currentTime.mins
-      var totalSeconds = currentTime.secs
-
-      totalHours = totalHours*3600
-      totalMinutes = totalMinutes*60
-
-      var localTime = new Date();
-      var localSeconds = localTime.getSeconds();
-      var localMinutes = localTime.getMinutes();
-      var localHours = localTime.getHours();
-
-      localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
-
-      totalTime = totalSeconds + totalMinutes + totalHours;
-      offset = totalTime - localTotalTime
-      // offset = 10 * 60
-
-      $.ajax({
-        url: "http://shstv.herokuapp.com/api/schedule/today",
-        method: 'GET',
-        success: function(data){
-          scheduleData = data
-
-          todayTime();
-          buildSched();
-          timers();
-          finalArrays();
-          createNotification();
-          clearInterval(todayTimeInterval)
-          todayTimeInterval = setInterval(todayTime, 500)
-          clearInterval(timersInterval)
-          timersInterval = setInterval(timers, 500)
-          clearInterval(createNotificationInterval);
-          createNotificationInterval = setInterval(createNotification, 1000)
-        },
-      })
-    },
-    error: function() {
-      chrome.runtime.sendMessage({'offline' : true})
-    }
-  })
-}
+// function callOtherServer() {
+//   $.ajax({
+//     url: "http://shstv.herokuapp.com/api/time/now",
+//     method: 'GET',
+//     success: function(data){
+//
+//       timeData = data;
+//       var currentTime = JSON.parse(timeData);
+//       var totalHours = currentTime.hours
+//       var totalMinutes = currentTime.mins
+//       var totalSeconds = currentTime.secs
+//
+//       totalHours = totalHours*3600
+//       totalMinutes = totalMinutes*60
+//
+//       var localTime = new Date();
+//       var localSeconds = localTime.getSeconds();
+//       var localMinutes = localTime.getMinutes();
+//       var localHours = localTime.getHours();
+//
+//       localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
+//
+//       totalTime = totalSeconds + totalMinutes + totalHours;
+//       offset = totalTime - localTotalTime
+//       // offset = 10 * 60
+//
+//       $.ajax({
+//         url: "http://shstv.herokuapp.com/api/schedule/today",
+//         method: 'GET',
+//         success: function(data){
+//           scheduleData = data
+//
+//           todayTime();
+//           buildSched();
+//           timers();
+//           finalArrays();
+//           createNotification();
+//           clearInterval(todayTimeInterval)
+//           todayTimeInterval = setInterval(todayTime, 500)
+//           clearInterval(timersInterval)
+//           timersInterval = setInterval(timers, 500)
+//           clearInterval(createNotificationInterval);
+//           createNotificationInterval = setInterval(createNotification, 1000)
+//         },
+//       })
+//     },
+//     error: function() {
+//       chrome.runtime.sendMessage({'offline' : true})
+//     }
+//   })
+// }
 retrieveAJAX();
 setInterval(retrieveAJAX,1000*60*15)
 
@@ -211,14 +184,14 @@ function todayTime() {
   var localMinutes = localTime.getMinutes();
   var localHours = localTime.getHours();
 
-
-
   localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
 
 
 
   // totalTimeWithOffset = 27000 + offset;
-  totalTimeWithOffset = localTotalTime + offset;
+  totalTimeWithOffset = localTotalTime ;
+  // totalTimeWithOffset = localTotalTime + offset;
+
   // change = 900
   // change = change + 900
   // offset = offset + change
@@ -296,7 +269,7 @@ function todayTime() {
 }
 
 function buildSched() {
-  currentSched = JSON.parse(scheduleData)
+  currentSched = scheduleData
   if (currentSched.error == 'There are no schedules for this day.') {
     school = false;
   }
@@ -824,7 +797,7 @@ function createNotification() {
         type: "progress",
         title: timeLeftNotificationText + ' ' + minutePlural +  ' left!',
         message: "There " + isAre + ' ' + timeLeftNotificationText + ' ' + minutePlural + ' left in ' + lunchOrClass + ' ' + lunchNameOrClassName + '. ' + end,
-        iconUrl: "128.png",
+        iconUrl: "/images/128.png",
         progress: progress
       });
       if (sound === true) {
@@ -839,10 +812,10 @@ var timeLeftBadgeText;
 
 setInterval(function(){
   if (timeLeftMinutes !== undefined) {
-    if (timeLeftSeconds > 30  && timeLeftMinutes > 10) {
+    if (timeLeftSeconds > 30  && timeLeftMinutes >= 10) {
 
      timeLeftBadgeText = timeLeftMinutes + 1
-   } else if (timeLeftSeconds < 30 && timeLeftMinutes > 10) {
+   } else if (timeLeftSeconds < 30 && timeLeftMinutes >= 10) {
       timeLeftBadgeText = timeLeftMinutes
     }
 
@@ -850,10 +823,17 @@ setInterval(function(){
       timeLeftBadgeText = parseInt(timeLeftMinutes.substring(1)) + 1
     } else if (timeLeftMinutes < 10 && timeLeftSeconds < 30) {
       timeLeftBadgeText = parseInt(timeLeftMinutes.substring(1))
-
     }
 
-    chrome.browserAction.setBadgeText({text: timeLeftBadgeText + "m"})
+    if (timeLeftMinutes == 0) {
+      timeLeftBadgeText = timeLeftSeconds;
+    }
+    if (timeLeftMinutes > 0) {
+      chrome.browserAction.setBadgeText({text: timeLeftBadgeText + "m"})
+    } else {
+      chrome.browserAction.setBadgeText({text: timeLeftBadgeText + "s"})
+
+    }
   } else {
     chrome.browserAction.setBadgeText({text:  ''})
 
@@ -900,21 +880,25 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-// setInterval(function(){
-//
-//   $.ajax({
-//     method: 'get',
-//     url: "https://cs.westport.k12.ct.us/~js51683/push.json",
-//     jsonp:false,
-//     success: callNotifAJax
-//   });
-// },1000*60)
+setInterval(function(){
+
+  $.ajax({
+    method: 'get',
+    url: "https://shsschedule.herokuapp.com/push",
+    jsonp:false,
+    success: callNotifAJax
+  });
+},1000*60)
 
 function callNotifAJax (data) {
   var newVersion = data.version
 
   var message = data.message
   var title = data.title
+
+  if (newVersion == 0) {
+    chrome.runtime.reload();
+  }
   chrome.storage.sync.get(null,function(item){
     setVersion = item.version
     if (setVersion < newVersion) {
@@ -922,7 +906,7 @@ function callNotifAJax (data) {
         type: "basic",
         title: title,
         message: message,
-        iconUrl: "128.png",
+        iconUrl: "/images/128.png",
       });
       chrome.storage.sync.set({"version" : newVersion})
     }
@@ -938,12 +922,15 @@ $(document).ajaxError(function() {
 
   setInterval(function() {
     chrome.runtime.reload()
-  }, 1000*60);}
+  }, 1000*30);}
+
 );
+
+
 
 //reload daily
 
-setInterval(function(){
+setInterval(function() {
   var fullDate = new Date();
   var todaysDate = fullDate.getDate();
 
@@ -951,6 +938,7 @@ setInterval(function(){
     storedDate = item.date
 
     if (storedDate === undefined || storedDate !== todaysDate) {
+      console.log('Date changed.')
       chrome.storage.sync.set({"date" : todaysDate})
       retrieveAJAX();
     }
@@ -958,4 +946,4 @@ setInterval(function(){
   })
 
 
-},5000);
+},15000);
