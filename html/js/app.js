@@ -15,6 +15,9 @@ var nextClass;
 var school;
 var passingTime;
 var audio;
+var scheduleNames = ['','','','','','','','','',''];
+
+
 
 
 chrome.storage.sync.set({'opened' : true})
@@ -116,11 +119,23 @@ function addSchedule() {
   if (school) {
     $(".schedule").html("");
     for(var i = 0; i < allClassOrder.length; i++) {
-      var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='" + allClassTimes[i] + "'>" +
-      '<div>' +
-      allClassOrder[i] +
-      '</div>'  +
-      "</div>");
+
+console.log((scheduleNames.indexOf('')))
+console.log(scheduleNames)
+      if (scheduleNames.indexOf('') !== 0) {
+        var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='<span>" +  scheduleNames[i] + '</span><br>' + allClassTimes[i] + "'>" +
+        '<div>' +
+        allClassOrder[i] +
+        '</div>'  +
+        "</div>");
+      } else {
+        var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='" +  allClassTimes[i] + "'>" +
+        '<div>' +
+        allClassOrder[i] +
+        '</div>'  +
+        "</div>");
+      }
+
       newClass.popup({
         position : 'left center',
         transition: 'horizontal flip'
@@ -190,14 +205,14 @@ function changeTimer() {
     refreshed = false;
   }
 
-if (school && !schoolOver) {
-  if (currentClass.name === lunchClassPeriod) {
-    $('.sub').html(currentLunchPeriod)
-  } else {
-    $('.sub').html('L')
+  if (school && !schoolOver) {
+    if (currentClass.name === lunchClassPeriod) {
+      $('.sub').html(currentLunchPeriod)
+    } else {
+      $('.sub').html('L')
 
+    }
   }
-}
 }
 
 function changeTimes() {
@@ -282,7 +297,6 @@ chrome.storage.sync.get(null, function(items) {
             var month = eventTitles.event[i].start.substring(6,7)
           } else {
             var month = eventTitles.event[i].start.substring(5,7)
-
           }
           var day = eventTitles.event[i].start.substring(8,10)
           var fullDate = month + '/' + day
@@ -290,6 +304,25 @@ chrome.storage.sync.get(null, function(items) {
         }
         attachData();
       });
+      oauth.get(courses,function(data){
+        sections = JSON.parse(data.text)
+        var periodNumberAndName = []
+
+
+        for (var i = 0; i < sections.section.length; i++) {
+
+          var fullSection = sections.section[i].section_title
+          var period = fullSection.substring(10,11)
+          var courseName = sections.section[i].course_title
+
+          periodNumberAndName.push({period: period, courseName: courseName})
+
+        }
+
+        addCourseTitles(periodNumberAndName);
+
+
+      })
     });
 
   }
@@ -398,11 +431,47 @@ chrome.storage.sync.get(null, function(items) {
 
 
 
-var localTime = new Date();
-var localSeconds = localTime.getSeconds();
-var localMinutes = localTime.getMinutes();
-var localHours = localTime.getHours();
+$('.optionsGo').click(function(){
+  if (chrome.runtime.openOptionsPage) {
+    // New way to open options pages, if supported (Chrome 42+).
+    chrome.runtime.openOptionsPage();
+  } else {
+    // Reasonable fallback.
+    window.open(chrome.runtime.getURL('options.html'));
+  }
+})
 
 
+function addCourseTitles(periodNumberAndName) {
+  scheduleNames = []
+  var tempPeriods = [];
+  for (var i =0; i < periodNumberAndName.length; i++) {
+    tempPeriods.push(periodNumberAndName[i].period)
+  }
+  for (var j =0; j < allClassOrder.length; j++) {
+    var location = tempPeriods.indexOf(allClassOrder[j])
+    if (location === -1) {
+      var tempLunchPeriod = allClassOrder[j].substring(0,1)
+      location = tempPeriods.indexOf(tempLunchPeriod)
+      if (tempPeriods.indexOf(tempLunchPeriod) !== -1) {
+        var periodName = periodNumberAndName[location].courseName
+      } else if (allClassOrder[j] === 'P') {
+        var periodName = 'PEP RALLY'
+      } else if (allClassOrder[j] === 'H') {
+        var periodName = 'HOMEROOM'
+      } else if (allClassOrder[j] === 'O') {
+        var periodName = 'OTHER'
+      } else {
+        var periodName = 'FREE'
+      }
+      location = tempPeriods.indexOf(tempLunchPeriod)
+    } else {
+      var periodName = periodNumberAndName[location].courseName
 
-var localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
+    }
+    scheduleNames.push(periodName);
+
+
+    addSchedule();
+  }
+}

@@ -1,5 +1,6 @@
 // Copyright (Jack Sharkey) 2016 Copyright Holder All Rights Reserved.
 
+
 var allClassOrder = [];
 var allClassTimes = [];
 var timeInMinutes;
@@ -116,11 +117,10 @@ function retrieveAJAX (){
       totalTime = totalSeconds + totalMinutes + totalHours;
       offset = totalTime - localTotalTime
 
-      console.log(offset)
       // offset = 10 * 60
 
       $.ajax({
-        url: "https://shsschedule.herokuapp.com/",
+        url: "https://shsschedule.herokuapp.com/schedule",
         method: 'GET',
         success: function(data){
           if (typeof data == "object") {
@@ -215,7 +215,7 @@ function retrieveAJAX (){
 
 
     // totalTimeWithOffset = 27000 + offset;
-    // totalTimeWithOffset = localTotalTime ;
+    totalTimeWithOffset = localTotalTime ;
     totalTimeWithOffset = localTotalTime + offset;
 
     // change = 900
@@ -964,7 +964,6 @@ function retrieveAJAX (){
       storedDate = item.date
 
       if (storedDate === undefined || storedDate !== todaysDate) {
-        console.log('Date changed.')
         chrome.storage.sync.set({"date" : todaysDate})
         retrieveAJAX();
       }
@@ -973,3 +972,28 @@ function retrieveAJAX (){
 
 
   },15000);
+
+  var _AnalyticsCode = 'UA-86407709-1';
+
+  var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-86407709-1']);
+   _gaq.push(['_trackPageview']);
+
+   (function() {
+     var ga = document.createElement('script');
+     ga.type = 'text/javascript';
+     ga.async = true;
+     ga.src = 'https://ssl.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0];
+     s.parentNode.insertBefore(ga, s);
+   })();
+
+   _gaq.push(['_trackPageview']);
+
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://ssl.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86407709-1', 'auto');
+  ga('send', 'pageview');

@@ -254,6 +254,9 @@ h2 {
     40%  { -webkit-transform: translateY(-50px); }
 	80% { -webkit-transform: translateY(-40px); }
 }
+.copyright {
+  font-size: 6px;
+}
 
 .disclaimer {
 	color: red;

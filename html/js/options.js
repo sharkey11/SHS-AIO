@@ -1,13 +1,23 @@
 var state;
 var sound;
 
+
+
 chrome.storage.sync.get(null, function(items) {
   consumerKey = items.consumerKey
   consumerSecret = items.consumerSecret
 
   $("#consumer").val(consumerKey)
   $("#secret").val(consumerSecret)
+
+
+  if ($("#consumer").val() !== '') {
+    $('.allow').html('Access granted. Click to grant access again.')
+  }
+
 });
+
+
 
 
 $('.allow').click(function(){
@@ -52,7 +62,6 @@ chrome.runtime.onMessage.addListener(
     onChange: function(value, text, $choice) {
       time = value * 60
       chrome.storage.sync.set({'notificationTimeWanted': time, 'textHTML' : text})
-      console.log(time)
     }
   })
 
@@ -62,7 +71,6 @@ chrome.runtime.onMessage.addListener(
     sound = items.sound
 
     $('.minutesText').html(textHTML)
-    console.log(state)
     if  (state === false) {
       $('#dropdown').addClass("disabled")
       $('#enabled').html('Disabled')
@@ -96,12 +104,10 @@ chrome.runtime.onMessage.addListener(
   $('.notificationsCheck').checkbox({
     onChange : function() {
       state = $('.notificationsCheck').checkbox('is checked')
-      console.log(state)
       chrome.storage.sync.set({'state': state})
       if  (state === false) {
 
         $('#dropdown').addClass("disabled")
-        console.log($('dropdown'))
         $('#enabled').html('Disabled')
         $('.divider').addClass("disabled")
         $('.sound').checkbox('set disabled')
@@ -143,8 +149,9 @@ setInterval(function(){
 
     if (hasKeys === "YES" && !opened) {
       $('.arrow').css("display", "inline")
-    } else {
+    } else if (hasKeys === "YES"){
       $('.arrow').css("display", "none")
+
 
     }
 
@@ -153,6 +160,32 @@ setInterval(function(){
 
 
 },1000)
+
+var _AnalyticsCode = 'UA-86407709-1';
+
+var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-86407709-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script');
+   ga.type = 'text/javascript';
+   ga.async = true;
+   ga.src = 'https://ssl.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0];
+   s.parentNode.insertBefore(ga, s);
+ })();
+
+ _gaq.push(['_trackPageview']);
+
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://ssl.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-86407709-1', 'auto');
+ga('send', 'pageview');
+
 
 
 
