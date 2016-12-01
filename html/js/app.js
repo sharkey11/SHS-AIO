@@ -11,13 +11,21 @@ var realTime;
 var today;
 var day;
 var timeOfDay;
+var userId;
 var nextClass;
 var school;
 var passingTime;
 var audio;
-var scheduleNames = ['','','','','','','','','',''];
-
-
+var periodNumberAndName;
+//
+// var config = {
+//   apiKey: "AIzaSyA2ZyG13I6qorKu7T9e5fqAs8sj-7KAm_o",
+//   authDomain: "shsschedule-3af18.firebaseapp.com",
+//   databaseURL: "https://shsschedule-3af18.firebaseio.com",
+//   storageBucket: "shsschedule-3af18.appspot.com",
+//   messagingSenderId: "380362637355"
+// };
+// firebase.initializeApp(config);
 
 
 chrome.storage.sync.set({'opened' : true})
@@ -118,13 +126,13 @@ window.onbeforeunload = function(){
 function addSchedule() {
   if (school) {
     $(".schedule").html("");
+
+
     for(var i = 0; i < allClassOrder.length; i++) {
 
-console.log((scheduleNames.indexOf('')))
-console.log(scheduleNames)
       if (scheduleNames.indexOf('') !== 0) {
         var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='<span>" +  scheduleNames[i] + '</span><br>' + allClassTimes[i] + "'>" +
-        '<div>' +
+        '<div class ="' + allClassOrder[i] + '">'  +
         allClassOrder[i] +
         '</div>'  +
         "</div>");
@@ -154,14 +162,13 @@ console.log(scheduleNames)
         }
       }
 
-
       $(".schedule").append(newClass);
     }
   } else if (school == false) {
     $(".schedule").html("");
     for(var i = 0; i < allClassOrder.length; i++) {
       var newClass = $("<div class = 'updatedSched'>" +
-      '<div>' +
+      '<div class ="' + allClassOrder[i] + '">'  +
       allClassOrder[i] +
       '</div>'  +
       "</div>");
@@ -181,10 +188,23 @@ console.log(scheduleNames)
 
   $('.updatedSched').css('font-size', totalObjectsHeight);
 
-  $('#lunch').click(function(){
-    var newURL = "http://shs.westport.k12.ct.us/uploaded/site_files/shs/main_office/Lunch_Schedule_16-17.pdf";
-    chrome.tabs.create({ url: newURL });
-  });
+  // $('#lunch').click(function(){
+  //   var newURL = "http://shs.westport.k12.ct.us/uploaded/site_files/shs/main_office/Lunch_Schedule_16-17.pdf";
+  //   chrome.tabs.create({ url: newURL });
+  // });
+
+  if(school) {
+    $('div.updatedSched').click(function() {
+      var clickedPeriodName = $(this).text()
+      var popup = $(this)
+      showAllClassAssignments(clickedPeriodName, popup);
+    })
+
+  } else {
+    $('.updatedSched').css("cursor", 'defaultburr')
+  }
+
+
 }
 var refreshed = false;
 
@@ -221,18 +241,19 @@ function changeTimes() {
 
 function changeDate() {
   $('.date').html(day + ' ' + today);
-
 }
 
 
 
+
 //******************************************SCHOOLOGY BREAK****************************************
-
-
-
-// chrome.storage.sync.get("consumerKeyStorage", function(value) {
-//   var consumerKey = value.consumerKeyStorage;
-// });
+function getFormattedDate(monthOffset) {
+  if (monthOffset === undefined) {
+    monthOffset = 0;
+  }
+  var today = new Date();
+  return(today.getFullYear() + '' + ('0' + (today.getMonth() + 1 + monthOffset)).slice(-2) + '' + ('0' + (today.getDate() )).slice(-2));
+}
 
 
 
@@ -243,7 +264,7 @@ chrome.storage.sync.get(null, function(items) {
 
   if (hasKeys === 'YES') {
     $('.noAssignments').css('display', 'none')
-    $('.dimmerNoKeys').dimmer('hide')
+    $('.dimmerNoKeys').dimmer('hide all')
     options = {
       enablePrivilege : false,
       consumerKey : consumerKey,
@@ -265,32 +286,23 @@ chrome.storage.sync.get(null, function(items) {
   }
 
 
-
-
-
   var courses;
 
 
 
 
-  function getFormattedDate(monthOffset) {
-    if (monthOffset === undefined) {
-      monthOffset = 0;
-    }
-    var today = new Date();
-    return(today.getFullYear() + '' + ('0' + (today.getMonth() + 1 + monthOffset)).slice(-2) + '' + ('0' + (today.getDate() )).slice(-2));
-  }
 
   function retrieveEvents() {
     allAssignments = [];
     var yyyymmdd = getFormattedDate();
     oauth.get('https://api.schoology.com/v1/app-user-info', function (data) {
 
-      var userId = JSON.parse(data.text).api_uid
+      userId  = JSON.parse(data.text).api_uid
       var eventsLink = 'https://api.schoology.com/v1/users/' + userId + '/events/?start_date=' + getFormattedDate() + '&end_date=' + getFormattedDate(1);
       courses = 'https://api.schoology.com/v1/users/' + userId + '/sections'
       oauth.get(eventsLink, function(data) {
         var eventTitles = JSON.parse(data.text)
+
         for(var i = 0; i < eventTitles.event.length; i++) {
           var year = eventTitles.event[i].start.substring(0,4)
           if (eventTitles.event[i].start.substring(5,6) == 0 ) {
@@ -306,7 +318,7 @@ chrome.storage.sync.get(null, function(items) {
       });
       oauth.get(courses,function(data){
         sections = JSON.parse(data.text)
-        var periodNumberAndName = []
+        periodNumberAndName = []
 
 
         for (var i = 0; i < sections.section.length; i++) {
@@ -315,9 +327,10 @@ chrome.storage.sync.get(null, function(items) {
           var period = fullSection.substring(10,11)
           var courseName = sections.section[i].course_title
 
-          periodNumberAndName.push({period: period, courseName: courseName})
+          periodNumberAndName.push({period: period, courseName: courseName, fullSection: sections.section[i].id})
 
         }
+
 
         addCourseTitles(periodNumberAndName);
 
@@ -384,6 +397,8 @@ chrome.storage.sync.get(null, function(items) {
 
           if (nonSpecificID == specificID) {
             var specificClass = sections.section[i].course_title
+
+
           }
 
 
@@ -394,13 +409,14 @@ chrome.storage.sync.get(null, function(items) {
 
         //write modal
 
+        if (specificClass == undefined) {
+          specificClass = "Custom Event"
+        }
+
         if (allAssignments[place].description == '' ) {
           description = $('<div class = "header">' +  txt + '</div><div class = "assignmentName">' + specificClass + '</div><div class = "ui divider"></div><div class="description">No description for this assignment.</div>');
 
-          // } else if (allAssignments[place].date == 'Add Assignment') {
-          //
-          //   // description = $('<div class = "header">' + txt + '</div><div class = "ui divider"></div><div class = "ui input">hi</div>');
-          //
+
         }  else  {
           description = $('<div class = "header">' + txt + '</div><div class = "assignmentName">' + specificClass + '</div><div class = "ui divider"></div><div class="description">' + allAssignments[place].description + '</div>');
 
@@ -419,6 +435,8 @@ chrome.storage.sync.get(null, function(items) {
       });
 
     })
+
+
     $( ".dimmer" ).click(function(e) {
       $('.dimmerSchool')
       .dimmer('hide');
@@ -445,8 +463,13 @@ $('.optionsGo').click(function(){
 function addCourseTitles(periodNumberAndName) {
   scheduleNames = []
   var tempPeriods = [];
+  var lunchPeriodFull;
   for (var i =0; i < periodNumberAndName.length; i++) {
     tempPeriods.push(periodNumberAndName[i].period)
+    if (periodNumberAndName[i].period == lunchClassPeriod) {
+      lunchPeriodFull = periodNumberAndName[i]
+
+    }
   }
   for (var j =0; j < allClassOrder.length; j++) {
     var location = tempPeriods.indexOf(allClassOrder[j])
@@ -468,10 +491,123 @@ function addCourseTitles(periodNumberAndName) {
     } else {
       var periodName = periodNumberAndName[location].courseName
 
+
     }
     scheduleNames.push(periodName);
 
 
-    addSchedule();
+
+
   }
+
+
+  addSchedule()
+
+}
+
+
+function showAllClassAssignments(clickedPeriodName, popup) {
+  var period = clickedPeriodName
+  if (period.substring(1,2) == "L") {
+    period = period.substring(0,1);
+  }
+  var localPeriodNameWithNumber = [];
+  var assignments = []
+
+  for (i = 0; i < allClassOrder.length; i++) {
+    if (allClassOrder[i].substring(2,5) == "div"){
+      allClassOrder[i] = allClassOrder[i].substring(0,1)
+    }
+    localPeriodNameWithNumber.push({period : allClassOrder[i], name : scheduleNames[i]})
+  }
+
+
+
+  var place = allClassOrder.indexOf(period)
+
+  var className = localPeriodNameWithNumber[place].name
+
+  for (i = 0; i < periodNumberAndName.length; i++) {
+    var temp = periodNumberAndName[i].courseName
+
+    if (temp == className) {
+      var place2 = i;
+    }
+
+  }
+
+  if (periodNumberAndName[place2] !== undefined) {
+
+
+
+    var sectionID = periodNumberAndName[place2].fullSection
+
+
+    var contains = false;
+
+
+    //retrieve all events for corresponding period
+    for(var i = 0; i < allAssignments.length; i++) {
+      if (allAssignments[i].section_id == sectionID) {
+        assignments.push(allAssignments[i])
+        contains = true;
+      }
+    }
+    console.log(assignments)
+
+    if (!contains) {
+      assignments[0] = {className : className, title: "No assignments!", description : " ", date: ""}
+
+    }
+  } else {
+    assignments[0] = {className : "Free", title: "No assignments!", description : " ", date: ""}
+
+  }
+  //display
+  var descriptionArray = []
+  var totalAssignments = []
+  className = $('<div class = "header">' + className + '</div>')
+  for (var p = 0; p < assignments.length; p++){
+
+    if (assignments[p].description == '' ) {
+      // className = $('<div class = "header">' +  className + '</div>')
+      // console.log(assignment[p])
+      assignment = $('<div class = "assignmentName2">' + assignments[p].title + '</div><div class="dateAll">' + assignments[p].date + '</div><div class="description2">No description for this assignment.</div><div class = "ui divider">');
+
+    }  else  {
+      // className = $('<div class = "header">' + className + '</div>')
+
+      assignment = $('<div class = "assignmentName2">' + assignments[p].title + '</div><div class="dateAll">' + assignments[p].date + '</div><div class="description2">' + assignments[p].description + '</div><div class = "ui divider">');
+    }
+    descriptionArray.push(assignment)
+    totalAssignments.push(className)
+
+  }
+
+
+  for (var k = 0; k < descriptionArray.length; k++) {
+    totalAssignments.push(descriptionArray[k])
+  }
+  $('.dimmerSchool').html(totalAssignments)
+  popup.popup('hide')
+
+
+
+
+  $('.dimmerFull').dimmer('hide');
+
+  $('.dimmerSchool')
+  .dimmer({
+    blurring: true
+  })
+  .dimmer('show');
+
+
+  $( ".dimmer" ).click(function(e) {
+    $('.dimmerSchool')
+    .dimmer('hide');
+
+  });
+
+
 }

@@ -91,7 +91,23 @@ right:30px;
   color: #CECECE;
   text-align: center;
   width: 50px;
-  cursor: default;
+  cursor: pointer;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.rightSide {
+  height: 380px;
+  padding-left: 10px;
+}
+.leftButton {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+
+}
+.rightButton {
+  margin: none !important;
 }
 .toprow {
   display: flex;
@@ -123,9 +139,13 @@ right:30px;
   width: 100%;
   z-index: 40;
 }
-.sub {
+.sub1 {
   display: inline;
   font-size: 18px;
+}
+.sub2 {
+  display: inline;
+  font-size: 12px;
 }
 
 .middlerow {
@@ -200,6 +220,18 @@ span {
   font-weight: bold;
 }
 
+.firstWave {
+  font-weight: normal;
+}
+.secondWave {
+  font-weight: normal;
+}
+.thirdWave {
+  font-weight: normal;
+}
+
+
+
 
 .header {
   font-family: clock;
@@ -217,7 +249,14 @@ span {
   text-align: left !important;
   left: 18px !important;
 }
-
+.assignmentName2 {
+  font-family: clock;
+  font-size: 18px;
+  color: white !important;
+  padding: 0px 0px 0px 0px!important;
+  text-align: left !important;
+  left: 18px !important;
+}
 .description {
   font-family: clock;
   font-size: 15px;
@@ -226,7 +265,29 @@ span {
   text-align: left !important;
   left: 18px !important;
   overflow-y: scroll;
-  height: 360px;
+  height: 340px;
+}
+
+.description2 {
+  font-family: clock;
+  font-size: 15px;
+  margin-top: 14px;
+  color: white !important;
+  text-align: left !important;
+  left: 18px !important;
+  overflow-y: scroll;
+  height: auto;
+}
+
+.dateAll {
+  font-family: clock;
+  font-size: 15px;
+  margin-top: 14px;
+  color: white !important;
+  text-align: left !important;
+  left: 18px !important;
+  overflow-y: scroll;
+  height: auto;
 }
 
 .modal {
@@ -244,7 +305,11 @@ span {
   background-color: rgba(51, 102, 153, 0.85) !important;
   text-align: left;
   padding: 15px !important;
+  overflow-y: scroll;
+
 }
+
+
 
 .segment {
   padding: 0px 0px 0px 0px !important;
@@ -298,4 +363,8 @@ html, body {
   padding: 10px;
   font-family: clock;
   color: #336699;
+}
+
+.arrows {
+  display: inline;
 }

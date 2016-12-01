@@ -81,7 +81,13 @@ chrome.runtime.onInstalled.addListener(function(details){
     window.open(chrome.runtime.getURL('/html/options.html'));
 
   } else if(details.reason == "update"){
-    var thisVersion = chrome.runtime.getManifest().vebion;
+    var thisVersion = chrome.runtime.getManifest().version;
+    // chrome.notifications.create ({
+    //   type: "basic",
+    //   title: "Update",
+    //   message: "You can now view all assignments by class. Click on the corresponding period number to view all assignments for that certain class.",
+    //   iconUrl: "/images/128.png",
+    // });
 
   };
 });
@@ -115,11 +121,12 @@ function retrieveAJAX (){
       localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
 
       totalTime = totalSeconds + totalMinutes + totalHours;
-      offset = totalTime - localTotalTime
+      offset = totalTime - localTotalTime;
 
       // offset = 10 * 60
 
       $.ajax({
+        // url: "https://tv.csapp.westport.k12.ct.us/api/schedule/2016/11/23",
         url: "https://shsschedule.herokuapp.com/schedule",
         method: 'GET',
         success: function(data){
@@ -717,8 +724,8 @@ function retrieveAJAX (){
 
   function finalArrays () {
     if (isLunch) {
-      allClassOrder.splice(lunchPeriodReplaced,1, + lunchPeriodName + "<div class = 'sub'>L</sub>")
-      allClassTimes.splice(lunchTimeReplaced,1, waveOneStartResult + ' - ' + waveOneEndResult + '<br>' + waveTwoStartResult + ' - ' + waveTwoEndResult + '<br>' + waveThreeStartResult + ' - ' + waveThreeEndResult + "'id = 'lunch");
+      allClassOrder.splice(lunchPeriodReplaced,1, + lunchPeriodName + "<div class = 'sub1'>L</div><div class = 'sub2'>(2nd)</div>")
+      allClassTimes.splice(lunchTimeReplaced,1,'<span class = "firstWave">' +  waveOneStartResult + ' - ' + waveOneEndResult + '</span><br><span class = "secondWave">'  + waveTwoStartResult + ' - ' + waveTwoEndResult + '</span><br><span class = "thirdWave">' + waveThreeStartResult + ' - ' + waveThreeEndResult + "</span>'id = 'lunch");
     }
   }
 
