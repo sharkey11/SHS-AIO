@@ -16,16 +16,10 @@ var nextClass;
 var school;
 var passingTime;
 var audio;
+var scheduleNames = ['','','','','','','','','',''];
 var periodNumberAndName;
-//
-// var config = {
-//   apiKey: "AIzaSyA2ZyG13I6qorKu7T9e5fqAs8sj-7KAm_o",
-//   authDomain: "shsschedule-3af18.firebaseapp.com",
-//   databaseURL: "https://shsschedule-3af18.firebaseio.com",
-//   storageBucket: "shsschedule-3af18.appspot.com",
-//   messagingSenderId: "380362637355"
-// };
-// firebase.initializeApp(config);
+var classLunchWave;
+
 
 
 chrome.storage.sync.set({'opened' : true})
@@ -107,7 +101,7 @@ function retriveVariables() {
         timeOfDay = request.timeOfDay
         changeDate();
         changeTimes();
-        setInterval(changeTimes,500)
+        // setInterval(changeTimes,500)
       }
     }
 
@@ -150,14 +144,14 @@ function addSchedule() {
       });
 
       if (schoolOver == false || school === false) {
-        if (allClassOrder[i] == currentClass.name || currentClass.name + "<div class = 'sub'>L</sub>" === allClassOrder[i]) {
+        if (allClassOrder[i] == currentClass.name || currentClass.name + "<div class = 'sub1'>L</div><div class = 'sub2'></div>" === allClassOrder[i]) {
           newClass.css("color", "#336699")
         }
 
         //(passingTime)
         //(nextClass.name + '<div class = "sub">L</sub>')
         //(allClassOrder[i])
-        if (passingTime && (nextClass.name === allClassOrder[i] || nextClass.name + "<div class = 'sub'>L</sub>" === allClassOrder[i])) {
+        if (passingTime && (nextClass.name === allClassOrder[i] || nextClass.name + "<div class = 'sub1'>L</div><div class = 'sub2'></div>" === allClassOrder[i])) {
           newClass.css("color", 'green')
         }
       }
@@ -205,6 +199,20 @@ function addSchedule() {
   }
 
 
+  if (classLunchWave === 1) {
+    $('.sub2').html('(1)')
+  }
+  if (classLunchWave === 2) {
+    $('.sub2').html('(2)')
+  }
+  if (classLunchWave === 3) {
+    $('.sub2').html('(3)')
+  }
+  if (classLunchWave === "F") {
+    $('.sub2').html('(F)')
+  }
+
+
 }
 var refreshed = false;
 
@@ -227,9 +235,9 @@ function changeTimer() {
 
   if (school && !schoolOver) {
     if (currentClass.name === lunchClassPeriod) {
-      $('.sub').html(currentLunchPeriod)
+      $('.sub1').html(currentLunchPeriod)
     } else {
-      $('.sub').html('L')
+      $('.sub1').html('L')
 
     }
   }
@@ -240,20 +248,212 @@ function changeTimes() {
 }
 
 function changeDate() {
-  $('.date').html(day + ' ' + today);
+  if (!different) {
+    $('.date').html(day + ' ' + today);
+
+  } else {
+    $('.date').html(day2 + ' ' + date2);
+
+  }
 }
 
+var days = 0;
+$('.leftButton').click(function(){
+  days -= 1
+  getNewDate();
+});
+
+$('.rightButton').click(function(){
+  days += 1;
+  getNewDate();
+});
+
+var date2;
+var day2;
+
+function getNewDate() {
+  var d1 = Date.today().add(days).days()
+  day2 = d1.getDayName()
+
+  date = d1.getDate()
+  date2 = d1.toString('MM/dd')
 
 
+  // var d1 = date.parse();
+  d1 = d1.toString('yyyyMMdd');
+
+
+  var link = 'https://shsschedule.herokuapp.com/schedule/' + d1
+  $.ajax({
+    // url: "http://shstv.herokuapp.com/api/schedule/2016/12/01",
+    url: link,
+    method: 'GET',
+    success: function(data){
+      if (typeof data == "object") {
+        scheduleData = data;
+
+      } else {
+        scheduleData = JSON.parse(data)
+
+      }
+
+      currentSched = scheduleData
+      if (currentSched.error == 'There are no schedules for this day.') {
+        school = false;
+      }
+
+        allClassOrder = []
+      if (school) {
+        for(var i = 0; i < currentSched.length; i++) {
+
+          var startTime = currentSched[i].start_seconds
+          var tempStartHours  =  parseInt( startTime / 3600 ) % 24;
+          if (tempStartHours >= 13) {
+            var  startHours = tempStartHours - 12;
+          } else {
+            startHours = tempStartHours;
+          }
+          var startMinutes = parseInt( startTime / 60 ) % 60;
+          var startResult = (startHours < 10 ? "0" + startHours : startHours) + ":" + (startMinutes < 10 ? "0" + startMinutes : startMinutes);
+          var endTime = currentSched[i].end_seconds
+          var tempEndHours  =  parseInt( endTime / 3600 ) % 24;
+
+          if (tempEndHours >= 13) {
+            var  endHours = tempEndHours - 12;
+          } else {
+            endHours = tempEndHours
+          }
+          var endMinutes = parseInt( endTime / 60 ) % 60;
+          var endResult = (endHours < 10 ? "0" + endHours : endHours) + ":" + (endMinutes < 10 ? "0" + endMinutes : endMinutes);
+          allClassTimes.push(startResult + " - " + endResult);
+
+          var classOrder = currentSched[i].name
+          allClassOrder.push(classOrder);
+        }
+        for(var i = 0; i < currentSched.length; i++) {
+          lunchArray = currentSched[i].lunch
+
+          if (lunchArray.length === 3) {
+
+            lunchClass = currentSched[i]
+            lunchClassPeriod = currentSched[i].name
+            isLunch = true;
+            var lunchClassArray = lunchClass.lunch;
+            lunchPeriodName = lunchClass.name;
+
+            originalLunchStart = lunchClass.start_seconds
+            originalLunchEnd = lunchClass.end_seconds
+
+            var originalLunchStartHours  =  parseInt( originalLunchStart / 3600 ) % 24;
+
+            var originalLunchStartMinutes = parseInt( originalLunchStart / 60 ) % 60;
+            var originalLunchStartResult = (originalLunchStartHours < 10 ? "0" + originalLunchStartHours : originalLunchStartHours) + ":" + (originalLunchStartMinutes < 10 ? "0" + originalLunchStartMinutes : originalLunchStartMinutes);
+
+            var originalLunchEndHours =  parseInt( originalLunchEnd / 3600 ) % 24;
+
+            var originalLunchEndMinutes = parseInt( originalLunchEnd / 60 ) % 60;
+            var originalLunchEndResult = (originalLunchEndHours < 10 ? "0" + originalLunchEndHours : originalLunchEndHours) + ":" + (originalLunchEndMinutes < 10 ? "0" + originalLunchEndMinutes : originalLunchEndMinutes);
+
+            var originalLunchFull = originalLunchStartResult + ' - ' + originalLunchEndResult
+            var checked = true;
+          }
+          else if (lunchArray.length === 0 && checked == false){
+            isLunch = false;
+          }
+        }
+
+
+
+        if (isLunch) {
+
+          var waveOne = lunchClassArray[0]
+          waveOneStart = waveOne.start_seconds
+          waveOneEnd = waveOne.end_seconds
+
+          var waveOneStartHours  =  parseInt( waveOneStart / 3600 ) % 24;
+
+          var waveOneStartMinutes = parseInt( waveOneStart / 60 ) % 60;
+          waveOneStartResult = (waveOneStartHours < 10 ? "0" + waveOneStartHours : waveOneStartHours) + ":" + (waveOneStartMinutes < 10 ? "0" + waveOneStartMinutes : waveOneStartMinutes);
+
+          var waveOneEndHours  =  parseInt( waveOneEnd / 3600 ) % 24;
+          var waveOneEndMinutes = parseInt( waveOneEnd / 60 ) % 60;
+          waveOneEndResult = (waveOneEndHours < 10 ? "0" + waveOneEndHours : waveOneEndHours) + ":" + (waveOneEndMinutes < 10 ? "0" + waveOneEndMinutes : waveOneEndMinutes);
+
+
+          var waveTwo = lunchClassArray[1]
+          waveTwoStart = waveTwo.start_seconds
+          waveTwoEnd = waveTwo.end_seconds
+
+          var waveTwoStartHours  =  parseInt( waveTwoStart / 3600 ) % 24;
+          var waveTwoStartMinutes = parseInt( waveTwoStart / 60 ) % 60;
+          waveTwoStartResult = (waveTwoStartHours < 10 ? "0" + waveTwoStartHours : waveTwoStartHours) + ":" + (waveTwoStartMinutes < 10 ? "0" + waveTwoStartMinutes : waveTwoStartMinutes);
+
+          var waveTwoEndHours  =  parseInt( waveTwoEnd / 3600 ) % 24;
+          var waveTwoEndMinutes = parseInt( waveTwoEnd / 60 ) % 60;
+          waveTwoEndResult = (waveTwoEndHours < 10 ? "0" + waveTwoEndHours : waveTwoEndHours) + ":" + (waveTwoEndMinutes < 10 ? "0" + waveTwoEndMinutes : waveTwoEndMinutes);
+
+
+          var waveThree = lunchClassArray[2]
+          waveThreeStart = waveThree.start_seconds
+          waveThreeEnd = waveThree.end_seconds
+
+          var waveThreeStartHours  =  parseInt( waveThreeStart / 3600 ) % 24;
+          var waveThreeStartMinutes = parseInt( waveThreeStart / 60 ) % 60;
+          waveThreeStartResult = (waveThreeStartHours < 10 ? "0" + waveThreeStartHours : waveThreeStartHours) + ":" + (waveThreeStartMinutes < 10 ? "0" + waveThreeStartMinutes : waveThreeStartMinutes);
+
+          var waveThreeEndHours  =  parseInt( waveThreeEnd / 3600 ) % 24;
+          var waveThreeEndMinutes = parseInt( waveThreeEnd / 60 ) % 60;
+          waveThreeEndResult = (waveThreeEndHours < 10 ? "0" + waveThreeEndHours : waveThreeEndHours) + ":" + (waveThreeEndMinutes < 10 ? "0" + waveThreeEndMinutes : waveThreeEndMinutes);
+
+          lunchPeriodReplaced = allClassOrder.indexOf(lunchPeriodName)
+          lunchTimeReplaced = allClassTimes.indexOf(originalLunchFull)
+
+        }
+      } else if (school == false) {
+        allClassOrder = 'NO  SCHOOL'
+        schoolOver = true;
+        isLunch = false;
+      }
+
+      if (isLunch) {
+        allClassOrder.splice(lunchPeriodReplaced,1, + lunchPeriodName + "<div class = 'sub1'>L</div><div class = 'sub2'></div>")
+        allClassTimes.splice(lunchTimeReplaced,1,'<span class = "firstWave">' +  waveOneStartResult + ' - ' + waveOneEndResult + '</span><br><span class = "secondWave">'  + waveTwoStartResult + ' - ' + waveTwoEndResult + '</span><br><span class = "thirdWave">' + waveThreeStartResult + ' - ' + waveThreeEndResult + "</span>'id = 'lunch");
+      }
+
+
+
+      addSchedule()
+      periodNumberAndName = []
+      scheduleNames = []
+      different = true;
+
+      retrieveEvents()
+    },
+  })
+
+  //send message to background
+
+}
+
+var different = false;
 
 //******************************************SCHOOLOGY BREAK****************************************
 function getFormattedDate(monthOffset) {
-  if (monthOffset === undefined) {
-    monthOffset = 0;
-  }
   var today = new Date();
-  return(today.getFullYear() + '' + ('0' + (today.getMonth() + 1 + monthOffset)).slice(-2) + '' + ('0' + (today.getDate() )).slice(-2));
+
+  if (monthOffset === undefined || monthOffset === 0) {
+    monthOffset = 0;
+    return(today.getFullYear() + '' + ('0' + (today.getMonth() + 1 + monthOffset)).slice(-2) + '' + ('0' + (today.getDate() )).slice(-2));
+  } else if (today.getMonth() !== 11) {
+    return(today.getFullYear() + '' + ('0' + (today.getMonth() + 1 + monthOffset)).slice(-2) + '' + ('0' + (today.getDate() )).slice(-2));
+
+
+} else {
+  return((today.getFullYear() + 1) + '' + ('01' + ('0' + (today.getDate() )).slice(-2)));
 }
+}
+
+
 
 
 
@@ -284,6 +484,7 @@ chrome.storage.sync.get(null, function(items) {
     .dimmer('show');
 
   }
+});
 
 
   var courses;
@@ -445,7 +646,6 @@ chrome.storage.sync.get(null, function(items) {
 
   }
 
-});
 
 
 
@@ -499,16 +699,58 @@ function addCourseTitles(periodNumberAndName) {
 
 
   }
+  //get lunch stuff
+  // classLunchWave = stuff[currentMonth]
+  var department;
+  $.getJSON("js/json/classes.json", function(json) {
+
+    // console.log(lunchPeriodFull)
+    if(lunchPeriodFull === undefined) {
+      var temp = "FREE";
+      lunchPeriodFull = {"courseName" : "FREE"}
+    } else {
+      var temp = lunchPeriodFull.courseName
+      temp = temp.replace(/\s+/g, '');
+    }
+    for (i = 0; i < json.length; i++) {
+      // console.log(json)
+      // if (json[i].class == lunchPeriodFull.courseName) {
+      if (json[i].class == temp ) {
+
+        // console.log(json[i].department);
+        department = json[i].department
+      }
+    }
+  });
+  $.getJSON("js/json/waves.json", function(json) {
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    //
+    var d = new Date();
+    var tempCurrentMonth = monthNames[d.getMonth()]
+    var currentMonth = tempCurrentMonth.substring(0,3) // Returns "Nov" (no spaces)
+    for (i = 0; i < json.length; i++) {
+      if (json[i].department == department) {
+        // console.log(json[i][currentMonth]);
+        classLunchWave = json[i][currentMonth]
+        changeLunch(classLunchWave);
+
+      }
+    }
+  });
 
 
   addSchedule()
 
 }
 
+function changeLunch(classLunchWave) {
+  $('.sub1').html(classLunchWave)
+  addSchedule()
+}
 
 function showAllClassAssignments(clickedPeriodName, popup) {
   var period = clickedPeriodName
-  if (period.substring(1,2) == "L") {
+  if (period.substring(1,2) == "L" || period.substring(1,2) == "1" || period.substring(1,2) == "2" || period.substring(1,2) == "3") {
     period = period.substring(0,1);
   }
   var localPeriodNameWithNumber = [];
@@ -553,7 +795,6 @@ function showAllClassAssignments(clickedPeriodName, popup) {
         contains = true;
       }
     }
-    console.log(assignments)
 
     if (!contains) {
       assignments[0] = {className : className, title: "No assignments!", description : " ", date: ""}
@@ -566,12 +807,13 @@ function showAllClassAssignments(clickedPeriodName, popup) {
   //display
   var descriptionArray = []
   var totalAssignments = []
+
   className = $('<div class = "header">' + className + '</div>')
+
   for (var p = 0; p < assignments.length; p++){
 
     if (assignments[p].description == '' ) {
       // className = $('<div class = "header">' +  className + '</div>')
-      // console.log(assignment[p])
       assignment = $('<div class = "assignmentName2">' + assignments[p].title + '</div><div class="dateAll">' + assignments[p].date + '</div><div class="description2">No description for this assignment.</div><div class = "ui divider">');
 
     }  else  {
@@ -588,11 +830,9 @@ function showAllClassAssignments(clickedPeriodName, popup) {
   for (var k = 0; k < descriptionArray.length; k++) {
     totalAssignments.push(descriptionArray[k])
   }
+
   $('.dimmerSchool').html(totalAssignments)
   popup.popup('hide')
-
-
-
 
   $('.dimmerFull').dimmer('hide');
 
@@ -608,6 +848,4 @@ function showAllClassAssignments(clickedPeriodName, popup) {
     .dimmer('hide');
 
   });
-
-
 }

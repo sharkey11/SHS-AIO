@@ -1,23 +1,23 @@
 [
   {
     "department": "Academic Support/ SST",
-    "class": "WELLNESS SEMINAR"
+    "class": "WELLNESSSEMINAR"
   },
   {
     "department": "Academic Support/ SST",
-    "class": "BRIDGE PROGRAM"
+    "class": "BRIDGEPROGRAM"
   },
   {
     "department": "Academic Support/ SST",
-    "class": "INTENSIVE READING & WRITING"
+    "class": "INTENSIVEREADING&WRITING"
   },
   {
     "department": "Academic Support/ SST",
-    "class": "ACADEMIC STUDY HALL"
+    "class": "ACADEMICSTUDYHALL"
   },
   {
     "department": "Academic Support/ SST",
-    "class": "PERSONALIZED STUDY SKILLS"
+    "class": "PERSONALIZEDSTUDYSKILLS"
   },
   {
     "department": "Art",
@@ -25,67 +25,63 @@
   },
   {
     "department": "Art",
-    "class": "BEG. DESIGN & TECH"
+    "class": "BEG.DESIGN&TECH"
   },
   {
     "department": "Art",
-    "class": "BEG. DESIGN  & TECH"
+    "class": "ADV.DESIGN&TECH"
   },
   {
     "department": "Art",
-    "class": "ADV. DESIGN & TECH"
+    "class": "SILKSCREEN1"
   },
   {
     "department": "Art",
-    "class": "SILK SCREEN 1"
+    "class": "ADV.SILKSCREEN"
   },
   {
     "department": "Art",
-    "class": "ADV. SILK SCREEN"
+    "class": "WATERCOLOR1"
   },
   {
     "department": "Art",
-    "class": "WATER COLOR 1"
+    "class": "ADV.WATERCOLOR"
   },
   {
     "department": "Art",
-    "class": "ADV. WATER COLOR"
+    "class": "OILPAINTING1"
   },
   {
     "department": "Art",
-    "class": "OIL PAINTING 1"
+    "class": "ADV.OILPAINTING"
   },
   {
     "department": "Art",
-    "class": "ADV. OIL PAINTING"
+    "class": "DRAWING1"
   },
   {
     "department": "Art",
-    "class": "DRAWING 1"
+    "class": "A.P.STUDIOART-DRAWING"
   },
   {
     "department": "Art",
-    "class": "A.P. STUDIO ART-DRAWING"
+    "class": "ADV.DRAWING"
   },
   {
     "department": "Art",
-    "class": "ADV. DRAWING"
+    "class": "SCULPTURE1"
   },
   {
     "department": "Art",
-    "class": "SCULPTURE 1"
+    "class": "ADV.SCULPTURE"
   },
   {
     "department": "Art",
-    "class": "ADV. SCULPTURE"
+    "class": "CERAMICS1"
   },
   {
     "department": "Art",
-    "class": "CERAMICS 1"
-  },
-  {
-    "department": "Art",
-    "class": "ADV. CERAMICS"
+    "class": "ADV.CERAMICS"
   },
   {
     "department": "Art",
@@ -93,115 +89,115 @@
   },
   {
     "department": "Art",
-    "class": "ADV. POTTERY"
+    "class": "ADV.POTTERY"
   },
   {
     "department": "Art",
-    "class": "JEWELRY 1"
+    "class": "JEWELRY1"
   },
   {
     "department": "Art",
-    "class": "ADV. JEWELRY"
+    "class": "ADV.JEWELRY"
   },
   {
     "department": "Art",
-    "class": "BEGINNING PHOTO"
+    "class": "BEGINNINGPHOTO"
   },
   {
     "department": "Art",
-    "class": "DIGITAL DARKROOM"
+    "class": "DIGITALDARKROOM"
   },
   {
     "department": "Art",
-    "class": "ADV. DIGITAL DARKROOM"
+    "class": "ADV.DIGITALDARKROOM"
   },
   {
     "department": "Art",
-    "class": "DARKROOM 1"
+    "class": "DARKROOM1"
   },
   {
     "department": "Art",
-    "class": "ADV. DARKROOM"
+    "class": "ADV.DARKROOM"
   },
   {
     "department": "Art",
-    "class": "HNRS. STUDIO ART"
+    "class": "HNRS.STUDIOART"
   },
   {
     "department": "Art",
-    "class": "MURAL PAINTING"
+    "class": "MURALPAINTING"
   },
   {
     "department": "Art",
-    "class": "A.P.  STUDIO ART 3-D"
+    "class": "A.P.STUDIOART3-D"
   },
   {
     "department": "Art",
-    "class": "IS ART"
+    "class": "ISART"
   },
   {
     "department": "Science",
-    "class": "IS COMPUTER TECH.ED.PRACTICUM"
+    "class": "ISCOMPUTERTECH.ED.PRACTICUM"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 1A"
+    "class": "ENGLISH1A"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 1B"
+    "class": "ENGLISH1B"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 1 HNRS"
+    "class": "ENGLISH1HNRS"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 2A"
+    "class": "ENGLISH2A"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 2B"
+    "class": "ENGLISH2B"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 2 HNRS"
+    "class": "ENGLISH2HNRS"
   },
   {
     "department": "English/ Language Arts",
-    "class": "IS ENGLISH"
+    "class": "ISENGLISH"
   },
   {
     "department": "English/ Language Arts",
-    "class": "A.P. ENGLISH LANGUAGE"
+    "class": "A.P.ENGLISHLANGUAGE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "RESEARCH & NON-FICTION"
+    "class": "RESEARCH&NON-FICTION"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 3: AMER. VOICES"
+    "class": "ENGLISH3:AMER.VOICES"
   },
   {
     "department": "English/ Language Arts",
-    "class": "EFFEC. WRITING & RESEARCH"
+    "class": "EFFEC.WRITING&RESEARCH"
   },
   {
     "department": "English/ Language Arts",
-    "class": "READING & WRITING POETRY"
+    "class": "READING&WRITINGPOETRY"
   },
   {
     "department": "English/ Language Arts",
-    "class": "CONTEMP. AMERICAN LIT."
+    "class": "CONTEMP.AMERICANLIT."
   },
   {
     "department": "English/ Language Arts",
-    "class": "MYTHOLOGY & BIBLE"
+    "class": "MYTHOLOGY&BIBLE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "MYTHOLOGY & BIBLE HONORS"
+    "class": "MYTHOLOGY&BIBLEHONORS"
   },
   {
     "department": "English/ Language Arts",
@@ -209,31 +205,31 @@
   },
   {
     "department": "English/ Language Arts",
-    "class": "LIT. OF GENDER SEX IDENTITY"
+    "class": "LIT.OFGENDERSEXIDENTITY"
   },
   {
     "department": "English/ Language Arts",
-    "class": "CARIBBEAN LITERATURE"
+    "class": "CARIBBEANLITERATURE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "BRITISH LITERATURE"
+    "class": "BRITISHLITERATURE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "IRISH LITERATURE"
+    "class": "IRISHLITERATURE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "RHETORIC & PERSUASION"
+    "class": "RHETORIC&PERSUASION"
   },
   {
     "department": "English/ Language Arts",
-    "class": "CRIT. ANALYSIS FILM & LIT."
+    "class": "CRIT.ANALYSISFILM&LIT."
   },
   {
     "department": "English/ Language Arts",
-    "class": "READING & WRITING FICTION"
+    "class": "READING&WRITINGFICTION"
   },
   {
     "department": "English/ Language Arts",
@@ -241,135 +237,135 @@
   },
   {
     "department": "English/ Language Arts",
-    "class": "ADV. JOURNALISM"
+    "class": "ADV.JOURNALISM"
   },
   {
     "department": "English/ Language Arts",
-    "class": "VISUAL LITERACY-GRAPH. LIT."
+    "class": "VISUALLITERACY-GRAPH.LIT."
   },
   {
     "department": "English/ Language Arts",
-    "class": "A.P. ENGLISH LITERATURE"
+    "class": "A.P.ENGLISHLITERATURE"
   },
   {
     "department": "English/ Language Arts",
-    "class": "ENGLISH 4: SENIOR THEMES"
+    "class": "ENGLISH4:SENIORTHEMES"
   },
   {
     "department": "English/ Language Arts",
-    "class": "GOTHIC & HORROR LIT."
+    "class": "GOTHIC&HORRORLIT."
   },
   {
     "department": "English/ Language Arts",
-    "class": "SPORTS LIT. & RESEARCH"
+    "class": "SPORTSLIT.&RESEARCH"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "IS FAMILY CONSUMER SCI"
+    "class": "ISFAMILYCONSUMERSCI"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "CHILD DEVELOPMENT 1"
+    "class": "CHILDDEVELOPMENT1"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "CHILD DEVELOPMENT 2"
+    "class": "CHILDDEVELOPMENT2"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "CHILD STUDY"
+    "class": "CHILDSTUDY"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "CULINARY ARTS 1"
+    "class": "CULINARYARTS1"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "CULINARY ARTS 2"
+    "class": "CULINARYARTS2"
   },
   {
     "department": "Family and Consumer Science",
-    "class": "ADV. CULINARY ARTS"
+    "class": "ADV.CULINARYARTS"
   },
   {
     "department": "Mathematics",
-    "class": "IS MATH"
+    "class": "ISMATH"
   },
   {
     "department": "Mathematics",
-    "class": "APPLIED MATH 1"
+    "class": "APPLIEDMATH1"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 1A"
+    "class": "ALGEBRA1A"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 1B"
+    "class": "ALGEBRA1B"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 1C"
+    "class": "ALGEBRA1C"
   },
   {
     "department": "Mathematics",
-    "class": "GEOMETRY A"
+    "class": "GEOMETRYA"
   },
   {
     "department": "Mathematics",
-    "class": "GEOMETRY B"
+    "class": "GEOMETRYB"
   },
   {
     "department": "Mathematics",
-    "class": "GEOMETRY C"
+    "class": "GEOMETRYC"
   },
   {
     "department": "Mathematics",
-    "class": "GEOMETRY HNRS"
+    "class": "GEOMETRYHNRS"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 2A"
+    "class": "ALGEBRA2A"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 2B"
+    "class": "ALGEBRA2B"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 2C"
+    "class": "ALGEBRA2C"
   },
   {
     "department": "Mathematics",
-    "class": "ALGEBRA 2 HNRS"
+    "class": "ALGEBRA2HNRS"
   },
   {
     "department": "Mathematics",
-    "class": "FINANCIAL ALGEBRA C"
+    "class": "FINANCIALALGEBRAC"
   },
   {
     "department": "Mathematics",
-    "class": "PRE-CALCULUS A"
+    "class": "PRE-CALCULUSA"
   },
   {
     "department": "Mathematics",
-    "class": "PRE-CALCULUS B"
+    "class": "PRE-CALCULUSB"
   },
   {
     "department": "Mathematics",
-    "class": "PRE-CALCULUS HNRS"
+    "class": "PRE-CALCULUSHNRS"
   },
   {
     "department": "Mathematics",
-    "class": "A.P. STATISTICS"
+    "class": "A.P.STATISTICS"
   },
   {
     "department": "Mathematics",
-    "class": "STATISTICS A"
+    "class": "STATISTICSA"
   },
   {
     "department": "Mathematics",
-    "class": "DISCRETE MATH"
+    "class": "DISCRETEMATH"
   },
   {
     "department": "Mathematics",
@@ -377,67 +373,67 @@
   },
   {
     "department": "Mathematics",
-    "class": "PRSNL. FINANCIAL MGMT."
+    "class": "PRSNL.FINANCIALMGMT."
   },
   {
     "department": "Mathematics",
-    "class": "A.P. CALCULUS BC"
+    "class": "A.P.CALCULUSBC"
   },
   {
     "department": "Mathematics",
-    "class": "A.P. CALCULUS AB"
+    "class": "A.P.CALCULUSAB"
   },
   {
     "department": "Mathematics",
-    "class": "CALCULUS HNRS"
+    "class": "CALCULUSHNRS"
   },
   {
     "department": "Mathematics",
-    "class": "CALCULUS BC +INTRO MULTIVAR"
+    "class": "CALCULUSBC+INTROMULTIVAR"
   },
   {
     "department": "Mathematics",
-    "class": "MULTIVARIABLE CALCULUS"
+    "class": "MULTIVARIABLECALCULUS"
   },
   {
     "department": "Mathematics",
-    "class": "DIFFERENTIAL EQUATIONS"
+    "class": "DIFFERENTIALEQUATIONS"
   },
   {
     "department": "Media",
-    "class": "AUDIO PRODUCTION"
+    "class": "AUDIOPRODUCTION"
   },
   {
     "department": "Media",
-    "class": "VIDEO GRAPHIC PROD."
+    "class": "VIDEOGRAPHICPROD."
   },
   {
     "department": "Media",
-    "class": "NARRATIVE FILM PROD."
+    "class": "NARRATIVEFILMPROD."
   },
   {
     "department": "Media",
-    "class": "RADIO PRODUCTION"
+    "class": "RADIOPRODUCTION"
   },
   {
     "department": "Media",
-    "class": "TV PRODUCTION"
+    "class": "TVPRODUCTION"
   },
   {
     "department": "Music",
-    "class": "IS MUSIC"
+    "class": "ISMUSIC"
   },
   {
     "department": "Music",
-    "class": "IS MUSIC TA"
+    "class": "ISMUSICTA"
   },
   {
     "department": "Music",
-    "class": "FR. CONCERT BAND"
+    "class": "FR.CONCERTBAND"
   },
   {
     "department": "Music",
-    "class": "SOPH. CONCERT BAND"
+    "class": "SOPH.CONCERTBAND"
   },
   {
     "department": "Music",
@@ -445,43 +441,43 @@
   },
   {
     "department": "Music",
-    "class": "SYMPHONIC BAND"
+    "class": "SYMPHONICBAND"
   },
   {
     "department": "Music",
-    "class": "FR. ORCHESTRA"
+    "class": "FR.ORCHESTRA"
   },
   {
     "department": "Music",
-    "class": "FR. WINDS-PERCUSSION"
+    "class": "FR.WINDS-PERCUSSION"
   },
   {
     "department": "Music",
-    "class": "SOPH. ORCHESTRA"
+    "class": "SOPH.ORCHESTRA"
   },
   {
     "department": "Music",
-    "class": "SYMPH. ORCHESTRA"
+    "class": "SYMPH.ORCHESTRA"
   },
   {
     "department": "Music",
-    "class": "SYMPH. WINDS/BRASS/PERCUSSION"
+    "class": "SYMPH.WINDS/BRASS/PERCUSSION"
   },
   {
     "department": "Music",
-    "class": "JAZZ ENSEMBLE"
+    "class": "JAZZENSEMBLE"
   },
   {
     "department": "Music",
-    "class": "PEP BAND"
+    "class": "PEPBAND"
   },
   {
     "department": "Music",
-    "class": "BEGINNING PIANO"
+    "class": "BEGINNINGPIANO"
   },
   {
     "department": "Music",
-    "class": "FR. CHORUS"
+    "class": "FR.CHORUS"
   },
   {
     "department": "Music",
@@ -489,115 +485,115 @@
   },
   {
     "department": "Music",
-    "class": "A CAPPELLA CHOIR"
+    "class": "ACAPPELLACHOIR"
   },
   {
     "department": "Music",
-    "class": "INTRO. MUSIC TECHNOLOGY"
+    "class": "INTRO.MUSICTECHNOLOGY"
   },
   {
     "department": "Music",
-    "class": "A.P. MUSIC THEORY"
+    "class": "A.P.MUSICTHEORY"
   },
   {
     "department": "Other Programs",
-    "class": "DRIVERS ED"
+    "class": "DRIVERSED"
   },
   {
     "department": "Physical Education",
-    "class": "FR HEALTH"
+    "class": "FRHEALTH"
   },
   {
     "department": "Physical Education",
-    "class": "FR RECREATIONAL ACT"
+    "class": "FRRECREATIONALACT"
   },
   {
     "department": "Physical Education",
-    "class": "FR MIND&BODY FIT"
+    "class": "FRMIND&BODYFIT"
   },
   {
     "department": "Physical Education",
-    "class": "FR AQUATIC ACT"
+    "class": "FRAQUATICACT"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH WELLNESS"
+    "class": "SOPHWELLNESS"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH TEAM ACT I"
+    "class": "SOPHTEAMACTI"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH CO-OP ACTIVITY"
+    "class": "SOPHCO-OPACTIVITY"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH LIFETIME ACT I"
+    "class": "SOPHLIFETIMEACTI"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH CO-OP ACT"
+    "class": "SOPHCO-OPACT"
   },
   {
     "department": "Physical Education",
-    "class": "SOPH LIFE ACT I"
+    "class": "SOPHLIFEACTI"
   },
   {
     "department": "Physical Education",
-    "class": "JR LIFETIME ACTIVITIES"
+    "class": "JRLIFETIMEACTIVITIES"
   },
   {
     "department": "Physical Education",
-    "class": "JR LIFETIME-HEALTH"
+    "class": "JRLIFETIME-HEALTH"
   },
   {
     "department": "Physical Education",
-    "class": "JR LIFETIME HEALTH"
+    "class": "JRLIFETIMEHEALTH"
   },
   {
     "department": "Physical Education",
-    "class": "JR LIFETIME&/OR RECR ACT"
+    "class": "JRLIFETIME&/ORRECRACT"
   },
   {
     "department": "Physical Education",
-    "class": "JR TEAM ACTIVITIES II"
+    "class": "JRTEAMACTIVITIESII"
   },
   {
     "department": "Physical Education",
-    "class": "JR TEAM-HEALTH"
+    "class": "JRTEAM-HEALTH"
   },
   {
     "department": "Physical Education",
-    "class": "JR TEAM II &/OR REC ACT"
+    "class": "JRTEAMII&/ORRECACT"
   },
   {
     "department": "Physical Education",
-    "class": "JR LIFETIME YOGA"
+    "class": "JRLIFETIMEYOGA"
   },
   {
     "department": "Physical Education",
-    "class": "LIFEGUARD TRAINING"
+    "class": "LIFEGUARDTRAINING"
   },
   {
     "department": "Physical Education",
-    "class": "IR PHYS ED"
+    "class": "IRPHYSED"
   },
   {
     "department": "Physical Education",
-    "class": "PHYS ED"
+    "class": "PHYSED"
   },
   {
     "department": "Science",
-    "class": "BIOLOGY A + LAB"
+    "class": "BIOLOGYA+LAB"
   },
   {
     "department": "Science",
-    "class": "BIOLOGY B + LAB"
+    "class": "BIOLOGYB+LAB"
   },
   {
     "department": "Science",
-    "class": "BIOLOGY HNRS + LAB"
+    "class": "BIOLOGYHNRS+LAB"
   },
   {
     "department": "Science",
@@ -605,11 +601,11 @@
   },
   {
     "department": "Science",
-    "class": "ANIMAL BEHAVIOR+LAB"
+    "class": "ANIMALBEHAVIOR+LAB"
   },
   {
     "department": "Science",
-    "class": "ENVIRON. SCIENCE+LAB"
+    "class": "ENVIRON.SCIENCE+LAB"
   },
   {
     "department": "Science",
@@ -621,208 +617,203 @@
   },
   {
     "department": "Science",
-    "class": "MEDICAL TERM.+LAB"
+    "class": "MEDICALTERM.+LAB"
   },
   {
     "department": "Science",
-    "class": "ANATOMY & PHYSIOL.+LAB"
+    "class": "ANATOMY&PHYSIOL.+LAB"
   },
   {
     "department": "Science",
-    "class": "MARINE BIOLOGY+LAB"
+    "class": "MARINEBIOLOGY+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. BIOLOGY+LAB"
+    "class": "A.P.BIOLOGY+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. ENVIRON. SCIENCE+LAB"
+    "class": "A.P.ENVIRON.SCIENCE+LAB"
   },
   {
     "department": "Science",
-    "class": "SCIENTIFIC RESEARCH+LAB"
+    "class": "SCIENTIFICRESEARCH+LAB"
   },
   {
     "department": "Science",
-    "class": "EARTH SCIENCE+LAB"
+    "class": "EARTHSCIENCE+LAB"
   },
   {
     "department": "Science",
-    "class": "CHEMISTRY B + LAB"
+    "class": "CHEMISTRYB+LAB"
   },
   {
     "department": "Science",
-    "class": "CHEMISTRY HNRS  + LAB"
+    "class": "CHEMISTRYHNRS+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. CHEMISTRY+LAB"
+    "class": "A.P.CHEMISTRY+LAB"
   },
   {
     "department": "Science",
-    "class": "INTRO. TO PROGRAMMING+LAB"
+    "class": "INTRO.TOPROGRAMMING+LAB"
   },
   {
     "department": "Science",
-    "class": "INTRO TO PROGRAMMING+LAB"
+    "class": "INTROTOPROGRAMMING+LAB"
   },
   {
     "department": "Science",
-    "class": "INTRO. TO WEB PROGRAM.+LAB"
+    "class": "INTRO.TOWEBPROGRAM.+LAB"
   },
   {
     "department": "Science",
-    "class": "BUILDING WEB APPS.+LAB"
+    "class": "BUILDINGWEBAPPS.+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. COMP. SCI. PRINCIPLES+LAB"
+    "class": "A.P.COMP.SCI.PRINCIPLES+LAB"
   },
   {
     "department": "Science",
-    "class": "JOURNEY SOLAR SYSTEMS+LAB"
+    "class": "JOURNEYSOLARSYSTEMS+LAB"
   },
   {
     "department": "Science",
-    "class": "STARS, GALAXIES & UNIVERSE+LAB"
+    "class": "STARS,GALAXIES&UNIVERSE+LAB"
   },
   {
     "department": "Science",
-    "class": "AEROSPACE SCIENCE+ LAB"
+    "class": "AEROSPACESCIENCE+LAB"
   },
   {
     "department": "Science",
-    "class": "PHYSICS A + LAB"
+    "class": "PHYSICSA+LAB"
   },
   {
     "department": "Science",
-    "class": "PHYSICS B + LAB"
+    "class": "PHYSICSB+LAB"
   },
   {
     "department": "Science",
-    "class": "PHYSICS HNRS + LAB"
+    "class": "PHYSICSHNRS+LAB"
   },
   {
     "department": "Science",
-    "class": "3-D DESIGN & ENGINEER.+LAB"
+    "class": "3-DDESIGN&ENGINEER.+LAB"
   },
   {
     "department": "Science",
-    "class": "CREATIVE TECH. SOL.+LAB"
+    "class": "CREATIVETECH.SOL.+LAB"
   },
   {
     "department": "Science",
-    "class": "MATERIALS & DESIGN SCI.+LAB"
+    "class": "MATERIALS&DESIGNSCI.+LAB"
   },
   {
     "department": "Science",
-    "class": "ENGINEER. & APPL. PHYSICS +LAB"
+    "class": "ENGINEER.&APPL.PHYSICS+LAB"
   },
   {
     "department": "Science",
-    "class": "ENGINEER. & APPL. PHYSICS+LAB"
+    "class": "ISSCIENCE"
   },
   {
     "department": "Science",
-    "class": "IS SCIENCE"
+    "class": "A.P.PHYSICS1+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. PHYSICS 1+LAB"
+    "class": "A.P.PHYSICSC+LAB"
   },
   {
     "department": "Science",
-    "class": "A.P. PHYSICS C+LAB"
-  },
-  {
-    "department": "Science",
-    "class": "IS COMPUTER SCIENCE"
+    "class": "ISCOMPUTERSCIENCE"
   },
   {
     "department": "Social Studies",
-    "class": "GLOBAL THEMES A"
+    "class": "GLOBALTHEMESA"
   },
   {
     "department": "Social Studies",
-    "class": "GLOBAL THEMES B"
+    "class": "GLOBALTHEMESB"
   },
   {
     "department": "Social Studies",
-    "class": "GLOBAL THEMES HONORS"
+    "class": "GLOBALTHEMESHONORS"
   },
   {
     "department": "Social Studies",
-    "class": "U.S. HISTORY A"
+    "class": "U.S.HISTORYA"
   },
   {
     "department": "Social Studies",
-    "class": "U.S. HISTORY HNRS"
+    "class": "U.S.HISTORYHNRS"
   },
   {
     "department": "Social Studies",
-    "class": "A.P. U.S. HISTORY"
+    "class": "A.P.U.S.HISTORY"
   },
   {
     "department": "Social Studies",
-    "class": "A.P. EURO. HISTORY"
+    "class": "A.P.EURO.HISTORY"
   },
   {
     "department": "Social Studies",
-    "class": "A.P. WORLD HISTORY"
+    "class": "A.P.WORLDHISTORY"
   },
   {
     "department": "Social Studies",
-    "class": "WOMEN IN HISTORY"
+    "class": "WOMENINHISTORY"
   },
   {
     "department": "Social Studies",
-    "class": "CONTEMP. WORLD STUDIES"
+    "class": "CONTEMP.WORLDSTUDIES"
   },
   {
     "department": "Social Studies",
-    "class": "AFRICAN STUDIES"
+    "class": "AFRICANSTUDIES"
   },
   {
     "department": "Social Studies",
-    "class": "EAST ASIAN STUDIES"
+    "class": "EASTASIANSTUDIES"
   },
   {
     "department": "Social Studies",
-    "class": "MIDDLE EAST STUDIES"
+    "class": "MIDDLEEASTSTUDIES"
   },
   {
     "department": "Social Studies",
-    "class": "LATIN AMER. STUDIES"
+    "class": "LATINAMER.STUDIES"
   },
   {
     "department": "Social Studies",
-    "class": "AMERICAN GOVT."
+    "class": "AMERICANGOVT."
   },
   {
     "department": "Social Studies",
-    "class": "A.P. U.S. GOVT. & POL. WTP"
+    "class": "A.P.U.S.GOVT.&POL.WTP"
   },
   {
     "department": "Social Studies",
-    "class": "A.P. U.S. GOVT. & POLITICS"
+    "class": "A.P.U.S.GOVT.&POLITICS"
   },
   {
     "department": "Social Studies",
-    "class": "INTRO. TO ECONOMICS"
+    "class": "INTRO.TOECONOMICS"
   },
   {
     "department": "Social Studies",
-    "class": "A.P. MACRO/MICRO ECON."
+    "class": "A.P.MACRO/MICROECON."
   },
   {
-    
     "department": "Social Studies",
     "class": "ANTHROPOLOGY"
   },
   {
     "department": "Social Studies",
-    "class": "CURRENT ISSUES"
+    "class": "CURRENTISSUES"
   },
   {
     "department": "Social Studies",
@@ -830,63 +821,59 @@
   },
   {
     "department": "Social Studies",
-    "class": "INTRO. TO PSYCHOLOGY"
+    "class": "INTRO.TOPSYCHOLOGY"
   },
   {
     "department": "Social Studies",
-    "class": "IS SOCIAL STUDIES"
+    "class": "ISSOCIALSTUDIES"
   },
   {
     "department": "Special Education",
-    "class": "APPLIED  LITERACY"
+    "class": "APPLIEDLITERACY"
   },
   {
     "department": "Special Education",
-    "class": "APPLIED LITERACY"
+    "class": "CONSUMERMATH"
   },
   {
     "department": "Special Education",
-    "class": "CONSUMER MATH"
+    "class": "CAREEREXPLORATION"
   },
   {
     "department": "Special Education",
-    "class": "CAREER EXPLORATION"
+    "class": "INTENSIVERESOURCE"
   },
   {
     "department": "Special Education",
-    "class": "INTENSIVE RESOURCE"
+    "class": "VOCATIONALINTERNSHIP"
   },
   {
     "department": "Special Education",
-    "class": "VOCATIONAL INTERNSHIP"
+    "class": "STUDYSKILLS2-Prior"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 - Prior"
+    "class": "STUDYSKILLS-Prior"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Prior"
+    "class": "IRPHYSED"
   },
   {
     "department": "Special Education",
-    "class": "IR PHYS ED"
+    "class": "ADAPPHYSED"
   },
   {
     "department": "Special Education",
-    "class": "ADAP PHYS ED"
+    "class": "IRADAPPHYSED"
   },
   {
     "department": "Special Education",
-    "class": "IR ADAP PHYS ED"
+    "class": "READINGWORKSHOP"
   },
   {
     "department": "Special Education",
-    "class": "READING WORKSHOP"
-  },
-  {
-    "department": "Special Education",
-    "class": "WELLNESS SEMINAR-Burkhart"
+    "class": "WELLNESSSEMINAR-Burkhart"
   },
   {
     "department": "Special Education",
@@ -894,7 +881,7 @@
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-DeFelice"
+    "class": "STUDYSKILLS-DeFelice"
   },
   {
     "department": "Special Education",
@@ -902,7 +889,7 @@
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Johannesson"
+    "class": "STUDYSKILLS-Johannesson"
   },
   {
     "department": "Special Education",
@@ -910,414 +897,406 @@
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Anderson"
+    "class": "STUDYSKILLS-Anderson"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Garcia"
+    "class": "STUDYSKILLS-Garcia"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Garcia"
+    "class": "STUDYSKILLS2-Garcia"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Barrington"
+    "class": "STUDYSKILLS-Barrington"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Barrington"
+    "class": "STUDYSKILLS2-Barrington"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 - O'Reilly"
+    "class": "STUDYSKILLS2-O'Reilly"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-O'Reilly"
+    "class": "STUDYSKILLS-O'Reilly"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-O'Reilly"
+    "class": "STUDYSKILLS-Burkhart"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Burkhart"
+    "class": "STUDYSKILLS2-DeFelice"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 - DeFelice"
+    "class": "STUDYSKILLS2-Gill"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-DeFelice"
+    "class": "STUDYSKILLS-Gill"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Gill"
+    "class": "STUDYSKILLS2-Johannesson"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Gill"
+    "class": "STUDYSKILLS2-Burkhart"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Johannesson"
+    "class": "STUDYSKILLS-Banyacsky"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Burkhart"
+    "class": "STUDYSKILLS2-Banyacsky"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Banyacsky"
+    "class": "STUDYSKILLS-Masiello"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Banyacsky"
+    "class": "STUDYSKILLS2-Masiello"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Masiello"
+    "class": "STUDYSKILLS-Faynor"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 - Masiello"
+    "class": "STUDYSKILLS2-Faynor"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Faynor"
+    "class": "STUDYSKILLS-Howden"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 -Faynor"
+    "class": "STUDYSKILLS2-Howden"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Faynor"
+    "class": "STUDYSKILLS-Anderson-Furlong"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Howden"
+    "class": "STUDYSKILLS2-Anderson-Furlong"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 - Howden"
+    "class": "STUDYSKILLS2Anderson-Furlong"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Anderson-Furlong"
+    "class": "STUDYSKILLS-Palmer"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2-Anderson-Furlong"
+    "class": "STUDYSKILLS2Palmer"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 Anderson-Furlong"
+    "class": "STUDYSKILLS2-Palmer"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS-Palmer"
+    "class": "STUDYSKILLS-Brennan"
   },
   {
     "department": "Special Education",
-    "class": "STUDY SKILLS 2 Palmer"
-  },
-  {
-    "department": "Special Education",
-    "class": "STUDY SKILLS 2 - Palmer"
-  },
-  {
-    "department": "Special Education",
-    "class": "STUDY SKILLS-Brennan"
-  },
-  {
-    "department": "Special Education",
-    "class": "STUDY SKILLS 2-Brennan"
+    "class": "STUDYSKILLS2-Brennan"
   },
   {
     "department": "Technology",
-    "class": "IS TECHNOLOGY ED."
+    "class": "ISTECHNOLOGYED."
   },
   {
     "department": "Technology",
-    "class": "TECH. EDUCATION 1"
+    "class": "TECH.EDUCATION1"
   },
   {
     "department": "Technology",
-    "class": "TECH. EDUCATION 2"
+    "class": "TECH.EDUCATION2"
   },
   {
     "department": "Technology",
-    "class": "ADV. TECH. EDUCATION"
+    "class": "ADV.TECH.EDUCATION"
   },
   {
     "department": "Theater",
-    "class": "THTR. 1 ACT. FNDMN"
+    "class": "THTR.1ACT.FNDMN"
   },
   {
     "department": "Theater",
-    "class": "THTR. 2 ADV. ACTING"
+    "class": "THTR.2ADV.ACTING"
   },
   {
     "department": "Theater",
-    "class": "THTR. 3 ACT. TECHNIQUE"
+    "class": "THTR.3ACT.TECHNIQUE"
   },
   {
     "department": "Theater",
-    "class": "THTR. 3 DIRECTING"
+    "class": "THTR.3DIRECTING"
   },
   {
     "department": "Theater",
-    "class": "IS THEATER. ASST. TEACHER"
+    "class": "ISTHEATER.ASST.TEACHER"
   },
   {
     "department": "Theater",
-    "class": "COSTUME/DESIGN THEATER"
+    "class": "COSTUME/DESIGNTHEATER"
   },
   {
     "department": "World Language",
-    "class": "LATIN 1A"
+    "class": "LATIN1A"
   },
   {
     "department": "World Language",
-    "class": "LATIN 2A"
+    "class": "LATIN2A"
   },
   {
     "department": "World Language",
-    "class": "LATIN 2 HNRS"
+    "class": "LATIN2HNRS"
   },
   {
     "department": "World Language",
-    "class": "LATIN 3A"
+    "class": "LATIN3A"
   },
   {
     "department": "World Language",
-    "class": "LATIN 3 HNRS"
+    "class": "LATIN3HNRS"
   },
   {
     "department": "World Language",
-    "class": "LATIN 4A"
+    "class": "LATIN4A"
   },
   {
     "department": "World Language",
-    "class": "LATIN 4 HNRS"
+    "class": "LATIN4HNRS"
   },
   {
     "department": "World Language",
-    "class": "A.P. LATIN"
+    "class": "A.P.LATIN"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 1A"
+    "class": "GERMAN1A"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 2A"
+    "class": "GERMAN2A"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 2 HNRS"
+    "class": "GERMAN2HNRS"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 3A"
+    "class": "GERMAN3A"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 3 HNRS"
+    "class": "GERMAN3HNRS"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 4A"
+    "class": "GERMAN4A"
   },
   {
     "department": "World Language",
-    "class": "GERMAN 4 HNRS"
+    "class": "GERMAN4HNRS"
   },
   {
     "department": "World Language",
-    "class": "A.P. GERMAN LANG. & CULTURE"
+    "class": "A.P.GERMANLANG.&CULTURE"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 1A"
+    "class": "FRENCH1A"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 2A"
+    "class": "FRENCH2A"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 2 HNRS"
+    "class": "FRENCH2HNRS"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 3A"
+    "class": "FRENCH3A"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 3 HNRS"
+    "class": "FRENCH3HNRS"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 4A"
+    "class": "FRENCH4A"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 4 HNRS"
+    "class": "FRENCH4HNRS"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 5A"
+    "class": "FRENCH5A"
   },
   {
     "department": "World Language",
-    "class": "FRENCH 5 HNRS"
+    "class": "FRENCH5HNRS"
   },
   {
     "department": "World Language",
-    "class": "A.P. FRENCH LANG. & CULTURE"
+    "class": "A.P.FRENCHLANG.&CULTURE"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 1C"
+    "class": "SPANISH1C"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 2C"
+    "class": "SPANISH2C"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 1A"
+    "class": "SPANISH1A"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 1B"
+    "class": "SPANISH1B"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 2A"
+    "class": "SPANISH2A"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 2B"
+    "class": "SPANISH2B"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 2 HNRS"
+    "class": "SPANISH2HNRS"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 3A"
+    "class": "SPANISH3A"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 3B"
+    "class": "SPANISH3B"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 3 HNRS"
+    "class": "SPANISH3HNRS"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 4A"
+    "class": "SPANISH4A"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 4 HNRS"
+    "class": "SPANISH4HNRS"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 5A"
+    "class": "SPANISH5A"
   },
   {
     "department": "World Language",
-    "class": "SPANISH 5 HNRS"
+    "class": "SPANISH5HNRS"
   },
   {
     "department": "World Language",
-    "class": "A.P. SPANISH LANG. & CULTURE"
+    "class": "A.P.SPANISHLANG.&CULTURE"
   },
   {
     "department": "World Language",
-    "class": "A.P. SPANISH LIT. & CULTURE"
+    "class": "A.P.SPANISHLIT.&CULTURE"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 1A"
+    "class": "MANDARINCHINESE1A"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 2A"
+    "class": "MANDARINCHINESE2A"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 3A"
+    "class": "MANDARINCHINESE3A"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 4A"
+    "class": "MANDARINCHINESE4A"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 2 HNRS"
+    "class": "MANDARINCHINESE2HNRS"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 3 HNRS"
+    "class": "MANDARINCHINESE3HNRS"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 4 HNRS"
+    "class": "MANDARINCHINESE4HNRS"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 5A"
+    "class": "MANDARINCHINESE5A"
   },
   {
     "department": "World Language",
-    "class": "MANDARIN CHINESE 5 HNRS"
+    "class": "MANDARINCHINESE5HNRS"
   },
   {
     "department": "World Language",
-    "class": "A.P. CHINESE LANG. & CULTURE"
+    "class": "A.P.CHINESELANG.&CULTURE"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 1A"
+    "class": "ITALIAN1A"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 2A"
+    "class": "ITALIAN2A"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 2 HNRS"
+    "class": "ITALIAN2HNRS"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 3A"
+    "class": "ITALIAN3A"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 3 HNRS"
+    "class": "ITALIAN3HNRS"
   },
   {
     "department": "World Language",
-    "class": "IS WORLD LANGUAGE"
+    "class": "ISWORLDLANGUAGE"
   },
   {
     "department": "World Language",
-    "class": "ITALIAN 4 HNRS"
+    "class": "ITALIAN4HNRS"
   },
   {
     "department": "World Language",
-    "class": "BEGIN. E.S.O.L."
+    "class": "BEGIN.E.S.O.L."
   },
   {
     "department": "World Language",
-    "class": "ADV. E.S.O.L."
+    "class": "ADV.E.S.O.L."
+  },
+  {
+    "department": "FREE",
+    "class": "FREE"
   }
 ]

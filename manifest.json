@@ -1,7 +1,7 @@
 {
   "name": "SHS All in One",
 
-  "version": "1.5.6",
+  "version": "1.6.5",
   "options_page": "/html/options.html",
   "manifest_version": 2,
   "description": "Check your upcoming Schoology assignments as well as today's daily schedule. Created by Jack Sharkey.",
@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://app.schoology.com/*"],
+      "matches": ["https://app.schoology.com/*", "https://schoology.westport.k12.ct.us/*"],
       "js": ["html/js/jquery-2.2.1.min.js", "html/js/keys.js"]
     }
   ],
@@ -40,5 +40,7 @@
   },
   "web_accessible_resources": [
     "images/48.png"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+
 }

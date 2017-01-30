@@ -1,6 +1,4 @@
 // Copyright (Jack Sharkey) 2016 Copyright Holder All Rights Reserved.
-
-
 var allClassOrder = [];
 var allClassTimes = [];
 var timeInMinutes;
@@ -123,11 +121,11 @@ function retrieveAJAX (){
       totalTime = totalSeconds + totalMinutes + totalHours;
       offset = totalTime - localTotalTime;
 
-      // offset = 10 * 60
+      // offset = -1 * 10 * 60
 
       $.ajax({
-        // url: "https://tv.csapp.westport.k12.ct.us/api/schedule/2016/11/23",
-        url: "https://shsschedule.herokuapp.com/schedule",
+        // url: "https://shsschedule.herokuapp.com/schedule/20170125",
+        url: "https://shsschedule.herokuapp.com/schedule/today",
         method: 'GET',
         success: function(data){
           if (typeof data == "object") {
@@ -156,57 +154,6 @@ function retrieveAJAX (){
   }
 
 
-  // function callOtherServer() {
-  //   $.ajax({
-  //     url: "http://shstv.herokuapp.com/api/time/now",
-  //     method: 'GET',
-  //     success: function(data){
-  //
-  //       timeData = data;
-  //       var currentTime = JSON.parse(timeData);
-  //       var totalHours = currentTime.hours
-  //       var totalMinutes = currentTime.mins
-  //       var totalSeconds = currentTime.secs
-  //
-  //       totalHours = totalHours*3600
-  //       totalMinutes = totalMinutes*60
-  //
-  //       var localTime = new Date();
-  //       var localSeconds = localTime.getSeconds();
-  //       var localMinutes = localTime.getMinutes();
-  //       var localHours = localTime.getHours();
-  //
-  //       localTotalTime = (localHours * 3600) + (localMinutes * 60) + localSeconds
-  //
-  //       totalTime = totalSeconds + totalMinutes + totalHours;
-  //       offset = totalTime - localTotalTime
-  //       // offset = 10 * 60
-  //
-  //       $.ajax({
-  //         url: "http://shstv.herokuapp.com/api/schedule/today",
-  //         method: 'GET',
-  //         success: function(data){
-  //           scheduleData = data
-  //
-  //           todayTime();
-  //           buildSched();
-  //           timers();
-  //           finalArrays();
-  //           createNotification();
-  //           clearInterval(todayTimeInterval)
-  //           todayTimeInterval = setInterval(todayTime, 500)
-  //           clearInterval(timersInterval)
-  //           timersInterval = setInterval(timers, 500)
-  //           clearInterval(createNotificationInterval);
-  //           createNotificationInterval = setInterval(createNotification, 1000)
-  //         },
-  //       })
-  //     },
-  //     error: function() {
-  //       chrome.runtime.sendMessage({'offline' : true})
-  //     }
-  //   })
-  // }
   retrieveAJAX();
   setInterval(retrieveAJAX,1000*60*15)
 
@@ -450,6 +397,7 @@ function retrieveAJAX (){
         if(currentClass !== lunchClassPeriod && passingTime == false ) {
           if (totalTimeWithOffset > lastClass.end_seconds || totalTimeWithOffset < firstClass.start_seconds && passingTime == false) {
             schoolOver = true;
+            console.log("hi")
             timeLeftMinutes = undefined;
           }
         }
@@ -724,7 +672,7 @@ function retrieveAJAX (){
 
   function finalArrays () {
     if (isLunch) {
-      allClassOrder.splice(lunchPeriodReplaced,1, + lunchPeriodName + "<div class = 'sub1'>L</div><div class = 'sub2'>(2nd)</div>")
+      allClassOrder.splice(lunchPeriodReplaced,1, + lunchPeriodName + "<div class = 'sub1'>L</div><div class = 'sub2'></div>")
       allClassTimes.splice(lunchTimeReplaced,1,'<span class = "firstWave">' +  waveOneStartResult + ' - ' + waveOneEndResult + '</span><br><span class = "secondWave">'  + waveTwoStartResult + ' - ' + waveTwoEndResult + '</span><br><span class = "thirdWave">' + waveThreeStartResult + ' - ' + waveThreeEndResult + "</span>'id = 'lunch");
     }
   }
@@ -861,6 +809,10 @@ function retrieveAJAX (){
       if (timeLeftMinutes == 0) {
         timeLeftBadgeText = timeLeftSeconds;
       }
+
+      if (timeLeftMinutes > 100) {
+        timeLeftBadgeText = '1hr+'
+      }
       if (timeLeftMinutes > 0) {
         chrome.browserAction.setBadgeText({text: timeLeftBadgeText + "m"})
       } else {
@@ -921,6 +873,10 @@ function retrieveAJAX (){
       jsonp:false,
       success: callNotifAJax
     });
+
+    //reload
+
+
   },1000*60)
 
   function callNotifAJax (data) {
@@ -978,7 +934,7 @@ function retrieveAJAX (){
     })
 
 
-  },15000);
+  },1000*60);
 
   var _AnalyticsCode = 'UA-86407709-1';
 

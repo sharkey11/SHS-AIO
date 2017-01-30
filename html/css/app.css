@@ -107,11 +107,12 @@ right:30px;
 
 }
 .rightButton {
-  margin: none !important;
+  margin-left: 1px !important;
 }
 .toprow {
   display: flex;
   font-family: clock;
+  width: 370px;
 }
 
 .times {
@@ -142,10 +143,14 @@ right:30px;
 .sub1 {
   display: inline;
   font-size: 18px;
+  color: #336699;
+
 }
 .sub2 {
   display: inline;
   font-size: 12px;
+  color: #336699;
+
 }
 
 .middlerow {
@@ -198,6 +203,7 @@ right:30px;
   color: white;
   cursor: default;
 }
+
 
 
 .title {
@@ -366,5 +372,6 @@ html, body {
 }
 
 .arrows {
-  display: inline;
+  border-left: 5px solid transparent;
+
 }
