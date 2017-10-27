@@ -124,7 +124,7 @@ function retrieveAJAX (){
       // offset = -1 * 10 * 60
 
       $.ajax({
-        // url: "https://shsschedule.herokuapp.com/schedule/20170125",
+        // url: "https://shsschedule.herokuapp.com/schedule/20170831",
         url: "https://shsschedule.herokuapp.com/schedule/today",
         method: 'GET',
         success: function(data){
@@ -256,11 +256,11 @@ function retrieveAJAX (){
 
     if (school) {
       for(var i = 0; i < currentSched.length; i++) {
-
         var startTime = currentSched[i].start_seconds
         var tempStartHours  =  parseInt( startTime / 3600 ) % 24;
         if (tempStartHours >= 13) {
           var  startHours = tempStartHours - 12;
+
         } else {
           startHours = tempStartHours;
         }
@@ -283,12 +283,13 @@ function retrieveAJAX (){
       }
       for(var i = 0; i < currentSched.length; i++) {
         lunchArray = currentSched[i].lunch
-
         if (lunchArray.length === 3) {
+
 
           lunchClass = currentSched[i]
           lunchClassPeriod = currentSched[i].name
           isLunch = true;
+
           var lunchClassArray = lunchClass.lunch;
           lunchPeriodName = lunchClass.name;
 
@@ -302,14 +303,21 @@ function retrieveAJAX (){
 
           var originalLunchEndHours =  parseInt( originalLunchEnd / 3600 ) % 24;
 
+          if (originalLunchEndHours >= 13) {
+            originalLunchEndHours -= 12;
+          }
+
           var originalLunchEndMinutes = parseInt( originalLunchEnd / 60 ) % 60;
           var originalLunchEndResult = (originalLunchEndHours < 10 ? "0" + originalLunchEndHours : originalLunchEndHours) + ":" + (originalLunchEndMinutes < 10 ? "0" + originalLunchEndMinutes : originalLunchEndMinutes);
 
           var originalLunchFull = originalLunchStartResult + ' - ' + originalLunchEndResult
           var checked = true;
+          console.log(originalLunchEndResult)
+
         }
         else if (lunchArray.length === 0 && checked == false){
           isLunch = false;
+
         }
       }
 
@@ -353,6 +361,9 @@ function retrieveAJAX (){
         waveThreeStartResult = (waveThreeStartHours < 10 ? "0" + waveThreeStartHours : waveThreeStartHours) + ":" + (waveThreeStartMinutes < 10 ? "0" + waveThreeStartMinutes : waveThreeStartMinutes);
 
         var waveThreeEndHours  =  parseInt( waveThreeEnd / 3600 ) % 24;
+        if (waveThreeEndHours >= 13) {
+          waveThreeEndHours -= 12;
+        }
         var waveThreeEndMinutes = parseInt( waveThreeEnd / 60 ) % 60;
         waveThreeEndResult = (waveThreeEndHours < 10 ? "0" + waveThreeEndHours : waveThreeEndHours) + ":" + (waveThreeEndMinutes < 10 ? "0" + waveThreeEndMinutes : waveThreeEndMinutes);
 
@@ -775,12 +786,11 @@ function retrieveAJAX (){
 
       if(notificationTime === totalTimeWithOffset && secondsPassed > 10) {
         chrome.notifications.create ({
-          type: "progress",
+          type: "basic",
           title: timeLeftNotificationText + ' ' + minutePlural +  ' left!',
           message: "There " + isAre + ' ' + timeLeftNotificationText + ' ' + minutePlural + ' left in ' + lunchOrClass + ' ' + lunchNameOrClassName + '. ' + end,
-          iconUrl: "/images/128.png",
-          progress: progress
-        });
+          iconUrl: "/images/128.png"
+           });
         if (sound === true) {
           audio.play();
         }
@@ -839,7 +849,7 @@ function retrieveAJAX (){
 
         if (sender.tab.title == 'Settings') {
           listening = true;
-          link = "http://schoology.westport.k12.ct.us/"
+          link = "http://schoology.westportps.org/"
           window.open(link);
         }
       }

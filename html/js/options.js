@@ -41,11 +41,11 @@ chrome.runtime.onMessage.addListener(
 
   $('.test').click(function(){
     chrome.notifications.create ({
-      type: "progress",
+      type: "basic",
       title:   'Sample - 5 minutes left!',
       message: "There are 5 minutes left in period 1. Next period is period 2.",
-      iconUrl: "/images/128.png",
-      progress: 80
+      iconUrl: "/images/128.png"
+      // progress: 80
     });
     audio.play();
   })

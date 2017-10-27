@@ -124,19 +124,19 @@ function addSchedule() {
 
     for(var i = 0; i < allClassOrder.length; i++) {
 
-      if (scheduleNames.indexOf('') !== 0) {
-        var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='<span>" +  scheduleNames[i] + '</span><br>' + allClassTimes[i] + "'>" +
-        '<div class ="' + allClassOrder[i] + '">'  +
-        allClassOrder[i] +
-        '</div>'  +
-        "</div>");
-      } else {
+      // if (scheduleNames.indexOf('') !== 0) {
+      //   var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='<span>" +  scheduleNames[i] + '</span><br>' + allClassTimes[i] + "'>" +
+      //   '<div class ="' + allClassOrder[i] + '">'  +
+      //   allClassOrder[i] +
+      //   '</div>'  +
+      //   "</div>");
+      // } else {
         var newClass = $("<div class = 'updatedSched' data-variation='tiny' data-html ='" +  allClassTimes[i] + "'>" +
         '<div>' +
         allClassOrder[i] +
         '</div>'  +
         "</div>");
-      }
+      // }
 
       newClass.popup({
         position : 'left center',
@@ -182,16 +182,16 @@ function addSchedule() {
 
   $('.updatedSched').css('font-size', totalObjectsHeight);
 
-  // $('#lunch').click(function(){
-  //   var newURL = "http://shs.westport.k12.ct.us/uploaded/site_files/shs/main_office/Lunch_Schedule_16-17.pdf";
-  //   chrome.tabs.create({ url: newURL });
-  // });
+  $('#lunch').click(function(){
+    var newURL = "http://shs.westportps.org/uploaded/site_files/shs/main_office/Lunch_Schedule_17-18.pdf";
+    chrome.tabs.create({ url: newURL });
+  });
 
   if(school) {
     $('div.updatedSched').click(function() {
       var clickedPeriodName = $(this).text()
       var popup = $(this)
-      showAllClassAssignments(clickedPeriodName, popup);
+      // showAllClassAssignments(clickedPeriodName, popup);
     })
 
   } else {
@@ -298,11 +298,16 @@ function getNewDate() {
       }
 
       currentSched = scheduleData
+      console.log(currentSched)
       if (currentSched.error == 'There are no schedules for this day.') {
         school = false;
+      } else {
+        school = true;
       }
-
+      schoolOver = true;
+      
         allClassOrder = []
+        allClassTimes = []
       if (school) {
         for(var i = 0; i < currentSched.length; i++) {
 
@@ -421,13 +426,12 @@ function getNewDate() {
       }
 
 
-
+      
       addSchedule()
       periodNumberAndName = []
       scheduleNames = []
       different = true;
-
-      retrieveEvents()
+      
     },
   })
 
@@ -501,8 +505,11 @@ chrome.storage.sync.get(null, function(items) {
       userId  = JSON.parse(data.text).api_uid
       var eventsLink = 'https://api.schoology.com/v1/users/' + userId + '/events/?start_date=' + getFormattedDate() + '&end_date=' + getFormattedDate(1);
       courses = 'https://api.schoology.com/v1/users/' + userId + '/sections'
+      var eventsLink2 = 'https://api.schoology.com/v1/users/' + userId + '/events/'
+      
       oauth.get(eventsLink, function(data) {
         var eventTitles = JSON.parse(data.text)
+        // console.log(eventTitles)
 
         for(var i = 0; i < eventTitles.event.length; i++) {
           var year = eventTitles.event[i].start.substring(0,4)
@@ -513,17 +520,70 @@ chrome.storage.sync.get(null, function(items) {
           }
           var day = eventTitles.event[i].start.substring(8,10)
           var fullDate = month + '/' + day
-          allAssignments.push({title: eventTitles.event[i].title, date: fullDate, description: eventTitles.event[i].description, section_id: eventTitles.event[i].section_id, type: eventTitles.event[i].type})
+          if(eventTitles.event[i].title == "A") {
+            var id = eventTitles.event[i].id
+            console.log(id)
+          }
+
+          var title = eventTitles.event[i].title
+
+          if ((title !== "B") && (title !== "C") && (title !== "A") && (title !== "D") && (title !== "X") && (title !== "D*") && (title !== "MIDTERM") && (title !== "FINAL")) {
+            // if (title !== "A") {
+              
+            console.log(title)
+            
+            allAssignments.push({title: eventTitles.event[i].title, date: fullDate, description: eventTitles.event[i].description, section_id: eventTitles.event[i].section_id, type: eventTitles.event[i].type})
+            
+          }
         }
         attachData();
       });
+      
+        
+      // $.getJSON("js/json/rotation.json", function(json) {
+      //   var length = (Object.keys(json).length)
+      //   for (i = 0; i < json.length; i++) {
+      //     var date = json[i].DATE
+      //     var title = json[i].TYPE
+
+      //     var year = date.substring(0,4)
+      //     var month = date.substring (4,6)
+      //     var day = date.substring(6,8)
+      //     var fullDateStringStart = year + "-" + month + "-" + day + " 00:00:00"
+      //     var fullDateStringEnd = year + "-" + month + "-" + day + " 23:59:59"
+          
+      //     console.log('before');
+      //     wait(2000);  //7 seconds in milliseconds
+      //     console.log('after');
+
+      //     oauth.postJSON(eventsLink2, {
+      //         'title' : title,
+      //         'start' : fullDateStringStart,
+      //         'end' : fullDateStringEnd
+      //       })
+
+      //     // console.log(date + ' ' + type)
+      //   }          
+      //   console.log("done")
+      // })        
+
+    // oauth.postJSON(eventsLink2, {
+    //   'title' : "testing from comp sci",
+    //   'start' : '2017-09-23 12:00:00'
+    // })
+      
+      
+
+      
+
+ 
+     
       oauth.get(courses,function(data){
         sections = JSON.parse(data.text)
         periodNumberAndName = []
 
 
         for (var i = 0; i < sections.section.length; i++) {
-
           var fullSection = sections.section[i].section_title
           var period = fullSection.substring(10,11)
           var courseName = sections.section[i].course_title
@@ -533,7 +593,7 @@ chrome.storage.sync.get(null, function(items) {
         }
 
 
-        addCourseTitles(periodNumberAndName);
+        // addCourseTitles(periodNumberAndName);
 
 
       })
@@ -541,8 +601,16 @@ chrome.storage.sync.get(null, function(items) {
 
   }
 
-  var sections;
+ 
 
+  var sections;
+  function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+ }
   function attachData() {
 
     day = ''
@@ -684,6 +752,8 @@ function addCourseTitles(periodNumberAndName) {
         var periodName = 'HOMEROOM'
       } else if (allClassOrder[j] === 'O') {
         var periodName = 'OTHER'
+      } else if (allClassOrder[j] === 'T') {
+      var periodName = 'TESTING'
       } else {
         var periodName = 'FREE'
       }

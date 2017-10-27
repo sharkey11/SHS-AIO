@@ -11,11 +11,11 @@ chrome.runtime.onMessage.addListener(
     if (request.readyFromJS === 'Ready') {
 
       console.log('get credentials')
-      if (window.location.href !== "https://schoology.westport.k12.ct.us/api") {
-        window.location.href = "https://schoology.westport.k12.ct.us/api";
+      if (window.location.href !== "https://schoology.westportps.org/api") {
+        window.location.href = "https://schoology.westportps.org/api";
       }
     }
-    if (window.location.href == "https://schoology.westport.k12.ct.us/api") {
+    if (window.location.href == "https://schoology.westportps.org/api") {
       console.log('On API')
       $('#edit-request').click();
       if($('#edit-current-key').length > 0 && $('#edit-current-secret').length > 0) {
