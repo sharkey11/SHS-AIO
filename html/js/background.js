@@ -70,6 +70,8 @@ chrome.runtime.onInstalled.addListener(function(details){
     $.ajax({
       method: 'get',
       url: "https://shsschedule.herokuapp.com/push",
+        // url: "http://127.0.0.1:8080/push",
+
       jsonp:false,
       success: function(data ) {
         version = data.version
@@ -99,6 +101,8 @@ function retrieveAJAX (){
   allClassTimes = []
   $.ajax({
     url: "https://shsschedule.herokuapp.com/time",
+            // url: "http://127.0.0.1:8080/time",
+
     method: 'GET',
     success: function(data){
 
@@ -124,7 +128,7 @@ function retrieveAJAX (){
       // offset = -1 * 10 * 60
 
       $.ajax({
-        // url: "https://shsschedule.herokuapp.com/schedule/20170831",
+        // url: "http://127.0.0.1:8080/schedule",
         url: "https://shsschedule.herokuapp.com/schedule/today",
         method: 'GET',
         success: function(data){
@@ -247,15 +251,28 @@ function retrieveAJAX (){
 
 
   }
-
+var dayType;
   function buildSched() {
     currentSched = scheduleData
     if (currentSched.error == 'There are no schedules for this day.') {
       school = false;
     }
 
+if (currentSched.length == 6) {
+  currentSched.push({"day":""}); 
+  
+  dayType = currentSched.slice(-1).pop()
+  
+} else {
+  dayType = currentSched[6]
+
+}
+
+
+console.log(currentSched)
+
     if (school) {
-      for(var i = 0; i < currentSched.length; i++) {
+      for(var i = 0; i < currentSched.length - 1; i++) {
         var startTime = currentSched[i].start_seconds
         var tempStartHours  =  parseInt( startTime / 3600 ) % 24;
         if (tempStartHours >= 13) {
@@ -281,7 +298,7 @@ function retrieveAJAX (){
         var classOrder = currentSched[i].name
         allClassOrder.push(classOrder);
       }
-      for(var i = 0; i < currentSched.length; i++) {
+      for(var i = 0; i < currentSched.length - 1; i++) {
         lunchArray = currentSched[i].lunch
         if (lunchArray.length === 3) {
 
@@ -312,7 +329,6 @@ function retrieveAJAX (){
 
           var originalLunchFull = originalLunchStartResult + ' - ' + originalLunchEndResult
           var checked = true;
-          console.log(originalLunchEndResult)
 
         }
         else if (lunchArray.length === 0 && checked == false){
@@ -382,11 +398,11 @@ function retrieveAJAX (){
     schoolOver = false;
     lunchTime = false;
     if (school) {
-      lastClass = currentSched[currentSched.length - 1];
+      lastClass = currentSched[currentSched.length - 2];
 
       var previousClass = currentClass;
       currentClass = 'passing';
-      for(var i = 0; i < currentSched.length; i++) {
+      for(var i = 0; i < currentSched.length - 1; i++) {
         if (totalTimeWithOffset >= currentSched[i].start_seconds && totalTimeWithOffset <= currentSched[i].end_seconds) {
           //DETERMINES CURRENT CLASS - CURRENTCLASS FORMULA
           currentClass = currentSched[i]
@@ -408,7 +424,6 @@ function retrieveAJAX (){
         if(currentClass !== lunchClassPeriod && passingTime == false ) {
           if (totalTimeWithOffset > lastClass.end_seconds || totalTimeWithOffset < firstClass.start_seconds && passingTime == false) {
             schoolOver = true;
-            console.log("hi")
             timeLeftMinutes = undefined;
           }
         }
@@ -425,7 +440,7 @@ function retrieveAJAX (){
         if (currentClass === undefined || currentClass == 'passing' || (currentClass.name === lunchClassPeriod && (totalTimeWithOffset > waveOneEnd && totalTimeWithOffset < waveTwoStart) || (totalTimeWithOffset > waveTwoEnd && totalTimeWithOffset < waveThreeStart)) && !schoolOver) {
           passingTime = true;
           currentClass = 'passing';
-          for(var i = 0; i < currentSched.length; i++) {
+          for(var i = 0; i < currentSched.length - 1; i++) {
             var nextClassPosition = currentSched.indexOf(currentSched[i]) + 1
             var nextClassTest = currentSched[nextClassPosition]
             if(lastClass.name != currentClass.name && nextClassTest !== undefined) {
@@ -689,7 +704,7 @@ function retrieveAJAX (){
   }
 
   function sendSchedulesVariables() {
-    chrome.runtime.sendMessage({'school' : school, 'allClassOrder' : allClassOrder, 'allClassTimes' : allClassTimes, 'schoolOver' : schoolOver, 'currentClass' : currentClass, 'passingTime' : passingTime, 'nextClass' : nextClass, 'schedule' : true, 'lunchClassPeriod' : lunchClassPeriod, 'currentLunchPeriod' : currentLunchPeriod})
+    chrome.runtime.sendMessage({'school' : school, 'allClassOrder' : allClassOrder, 'allClassTimes' : allClassTimes, 'schoolOver' : schoolOver, 'currentClass' : currentClass, 'passingTime' : passingTime, 'nextClass' : nextClass, 'schedule' : true, 'lunchClassPeriod' : lunchClassPeriod, 'currentLunchPeriod' : currentLunchPeriod, 'dayType' : dayType})
   }
 
   function sendTimeVariables () {

@@ -1,9 +1,9 @@
 {
   "name": "SHS All in One",
-
-  "version": "1.7.2",
+  "version": "1.7.9",
   "options_page": "/html/options.html",
   "manifest_version": 2,
+  "update_url": "http://0.0.0.0",
   "description": "Check your upcoming Schoology assignments as well as today's daily schedule. Created by Jack Sharkey.",
   "icons": {"16": "images/16.png", "48": "images/48.png", "128": "images/128.png"},
   "browser_action": {

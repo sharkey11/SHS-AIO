@@ -18,6 +18,7 @@ var passingTime;
 var audio;
 var scheduleNames = ['','','','','','','','','',''];
 var periodNumberAndName;
+var dayType;
 var classLunchWave;
 
 
@@ -78,6 +79,8 @@ function retriveVariables() {
         nextClass = request.nextClass
         lunchClassPeriod = request.lunchClassPeriod
         currentLunchPeriod = request.currentLunchPeriod
+        console.log(request.dayType)
+        dayType = request.dayType
         addSchedule();
       }
       if (request.time) {
@@ -211,6 +214,19 @@ function addSchedule() {
   if (classLunchWave === "F") {
     $('.sub2').html('(F)')
   }
+console.log(dayType)
+if (dayType !== undefined) {
+
+
+if (dayType.day !== "") {
+  $('.dayType').html(dayType.day)  
+} else {
+  $('.dayType').remove()  
+}
+} else {
+  $('.dayType').remove()  
+  
+}
 
 
 }
@@ -298,7 +314,6 @@ function getNewDate() {
       }
 
       currentSched = scheduleData
-      console.log(currentSched)
       if (currentSched.error == 'There are no schedules for this day.') {
         school = false;
       } else {
@@ -509,7 +524,6 @@ chrome.storage.sync.get(null, function(items) {
       
       oauth.get(eventsLink, function(data) {
         var eventTitles = JSON.parse(data.text)
-        // console.log(eventTitles)
 
         for(var i = 0; i < eventTitles.event.length; i++) {
           var year = eventTitles.event[i].start.substring(0,4)
@@ -522,7 +536,6 @@ chrome.storage.sync.get(null, function(items) {
           var fullDate = month + '/' + day
           if(eventTitles.event[i].title == "A") {
             var id = eventTitles.event[i].id
-            console.log(id)
           }
 
           var title = eventTitles.event[i].title
@@ -530,7 +543,6 @@ chrome.storage.sync.get(null, function(items) {
           if ((title !== "B") && (title !== "C") && (title !== "A") && (title !== "D") && (title !== "X") && (title !== "D*") && (title !== "MIDTERM") && (title !== "FINAL")) {
             // if (title !== "A") {
               
-            console.log(title)
             
             allAssignments.push({title: eventTitles.event[i].title, date: fullDate, description: eventTitles.event[i].description, section_id: eventTitles.event[i].section_id, type: eventTitles.event[i].type})
             
@@ -540,32 +552,32 @@ chrome.storage.sync.get(null, function(items) {
       });
       
         
-      // $.getJSON("js/json/rotation.json", function(json) {
-      //   var length = (Object.keys(json).length)
-      //   for (i = 0; i < json.length; i++) {
-      //     var date = json[i].DATE
-      //     var title = json[i].TYPE
+      $.getJSON("js/json/rotation.json", function(json) {
+        var length = (Object.keys(json).length)
+        for (i = 0; i < json.length; i++) {
+          var date = json[i].DATE
+          var title = json[i].TYPE
 
-      //     var year = date.substring(0,4)
-      //     var month = date.substring (4,6)
-      //     var day = date.substring(6,8)
-      //     var fullDateStringStart = year + "-" + month + "-" + day + " 00:00:00"
-      //     var fullDateStringEnd = year + "-" + month + "-" + day + " 23:59:59"
+          var year = date.substring(0,4)
+          var month = date.substring (4,6)
+          var day = date.substring(6,8)
+          var fullDateStringStart = year + "-" + month + "-" + day + " 00:00:00"
+          var fullDateStringEnd = year + "-" + month + "-" + day + " 23:59:59"
           
-      //     console.log('before');
-      //     wait(2000);  //7 seconds in milliseconds
-      //     console.log('after');
+          console.log('before');
+          wait(2000);  //7 seconds in milliseconds
+          console.log('after');
 
-      //     oauth.postJSON(eventsLink2, {
-      //         'title' : title,
-      //         'start' : fullDateStringStart,
-      //         'end' : fullDateStringEnd
-      //       })
+          oauth.postJSON(eventsLink2, {
+              'title' : title,
+              'start' : fullDateStringStart,
+              'end' : fullDateStringEnd
+            })
 
-      //     // console.log(date + ' ' + type)
-      //   }          
-      //   console.log("done")
-      // })        
+          // console.log(date + ' ' + type)
+        }          
+        console.log("done")
+      })        
 
     // oauth.postJSON(eventsLink2, {
     //   'title' : "testing from comp sci",
